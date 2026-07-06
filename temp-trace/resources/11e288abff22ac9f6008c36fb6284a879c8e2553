@@ -1,0 +1,591 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: checkout\address-validation.spec.ts >> Address Validation @checkout @validation >> Valid Addresses @regression >> Provide valid address and verify that checkout continues @regression
+- Location: tests\checkout\address-validation.spec.ts:52:9
+
+# Error details
+
+```
+TimeoutError: locator.click: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator('form').filter({ hasText: /Login|Email/i }).first().locator('button[type="submit"], button').filter({ hasText: /Log in|Login|Weiter/i }).first()
+    - locator resolved to <button disabled type="submit" data-size="lg" data-round="false" data-variant="primary" data-is-loading="false" data-testid="SubmitLogin" data-with-close-icon="false" class="sc-653216e6-3 hQnkov sapa3ca">…</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is not enabled
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is not enabled
+    - retrying click action
+      - waiting 100ms
+    59 × waiting for element to be visible, enabled and stable
+       - element is not enabled
+     - retrying click action
+       - waiting 500ms
+
+```
+
+# Page snapshot
+
+```yaml
+- main [ref=e2]:
+  - link "Skip to main content" [ref=e3] [cursor=pointer]:
+    - /url: "#page-content-wrapper"
+    - generic [ref=e4]: Skip to main content
+  - generic [ref=e5] [cursor=pointer]:
+    - img [ref=e6]
+    - generic [ref=e9]:
+      - generic [ref=e10]:
+        - generic [ref=e12]:
+          - img [ref=e13]
+          - generic [ref=e15]:
+            - generic [ref=e16]:
+              - generic [ref=e17]: "10"
+              - generic [ref=e18]: h
+            - generic [ref=e19]:
+              - generic [ref=e20]: "51"
+              - generic [ref=e21]: m
+            - generic [ref=e22]:
+              - generic [ref=e23]: "33"
+              - generic [ref=e24]: s
+        - 'link "Summer Essentials: DEALS with up to 50% discount" [ref=e25]':
+          - /url: /c/women-20201?hasCampaignReduction=true
+          - 'heading "Summer Essentials: DEALS with up to 50% discount" [level=4] [ref=e26]'
+      - button "Open info window" [ref=e27]:
+        - img [ref=e28]
+  - generic [ref=e31]:
+    - generic [ref=e32]:
+      - link "Outlet" [ref=e33] [cursor=pointer]:
+        - /url: https://aboutyou-outlet.de/?utm_source=aboutyou&utm_medium=shop&utm_campaign=metabar_desktop&adj_t=1cj3nxtn&adj_campaign=metabar_desktop
+        - img [ref=e34]
+        - text: Outlet
+      - link "Contact & Help" [ref=e36] [cursor=pointer]:
+        - /url: /h
+        - img [ref=e37]
+        - generic [ref=e39]: Contact & Help
+      - link "Impact Reduction" [ref=e40] [cursor=pointer]:
+        - /url: /cp/planet-100748
+        - img [ref=e41]
+        - generic [ref=e43]: Impact Reduction
+    - region [ref=e46] [cursor=pointer]:
+      - button "Language and country switch" [ref=e47]:
+        - generic [ref=e48]:
+          - generic [ref=e49]:
+            - img "Germany flag" [ref=e50]
+            - generic [ref=e51]: DE
+          - generic [ref=e52]: EN
+  - generic [ref=e54]:
+    - generic [ref=e55]:
+      - link "Women" [ref=e56] [cursor=pointer]:
+        - /url: /c/women-20201
+      - link "Men" [ref=e57] [cursor=pointer]:
+        - /url: /c/men-20202
+      - link "Kids" [ref=e58] [cursor=pointer]:
+        - /url: /c/kids-138113
+    - link "Navigate to the home page" [ref=e60] [cursor=pointer]:
+      - /url: /
+      - generic [ref=e61]:
+        - generic [ref=e62]: ABOUT
+        - generic [ref=e63]:
+          - text: YOU
+          - img [ref=e64]
+    - generic [ref=e68]:
+      - button "Open coupon wallet" [ref=e69] [cursor=pointer]:
+        - img [ref=e71]
+      - button "Login" [ref=e75] [cursor=pointer]:
+        - img [ref=e77]
+      - button "Open the notification center" [ref=e79] [cursor=pointer]:
+        - generic [ref=e83]: "1"
+      - button "Wishlist" [ref=e84] [cursor=pointer]:
+        - img [ref=e86]
+      - button "Basket" [ref=e88] [cursor=pointer]:
+        - img [ref=e90]
+  - generic [ref=e93]:
+    - list [ref=e96]:
+      - listitem [ref=e97]:
+        - link "Drops" [ref=e98] [cursor=pointer]:
+          - /url: /s/celebrity-collections-7779
+          - generic [ref=e99]: Drops
+      - listitem [ref=e100]:
+        - link "SALE" [ref=e101] [cursor=pointer]:
+          - /url: /c/women/sale-32543
+          - generic [ref=e102]:
+            - text: SALE
+            - img [ref=e103]
+      - listitem [ref=e105]:
+        - link "Clothing" [ref=e106] [cursor=pointer]:
+          - /url: /c/women/clothing-20204
+          - generic [ref=e107]:
+            - text: Clothing
+            - img [ref=e108]
+      - listitem [ref=e110]:
+        - link "Shoes" [ref=e111] [cursor=pointer]:
+          - /url: /c/women/shoes-20207
+          - generic [ref=e112]:
+            - text: Shoes
+            - img [ref=e113]
+      - listitem [ref=e115]:
+        - link "Sportswear" [ref=e116] [cursor=pointer]:
+          - /url: /hub/sportswear
+          - generic [ref=e117]:
+            - text: Sportswear
+            - img [ref=e118]
+      - listitem [ref=e120]:
+        - link "Accessories" [ref=e121] [cursor=pointer]:
+          - /url: /c/women/accessories-20203
+          - generic [ref=e122]:
+            - text: Accessories
+            - img [ref=e123]
+      - listitem [ref=e125]:
+        - link "Streetwear" [ref=e126] [cursor=pointer]:
+          - /url: /hub/streetwear
+          - generic [ref=e127]:
+            - text: Streetwear
+            - img [ref=e128]
+      - listitem [ref=e130]:
+        - link "Premium" [ref=e131] [cursor=pointer]:
+          - /url: /c/women/premium-144187
+          - generic [ref=e132]:
+            - text: Premium
+            - img [ref=e133]
+      - listitem [ref=e135]:
+        - link "Top 100" [ref=e136] [cursor=pointer]:
+          - /url: /c/women/top-100-657008
+          - generic [ref=e137]:
+            - text: Top 100
+            - img [ref=e138]
+      - listitem [ref=e140]:
+        - link "Brands" [ref=e141] [cursor=pointer]:
+          - /url: /brands?category=20201
+          - generic [ref=e142]: Brands
+      - listitem [ref=e143]:
+        - generic [ref=e145]: Inspiration
+    - generic [ref=e146]:
+      - button "Open search bar" [ref=e147] [cursor=pointer]:
+        - img [ref=e148]
+      - button "Clear search bar" [ref=e150] [cursor=pointer]:
+        - img [ref=e151]
+  - generic [ref=e154]:
+    - link "Free Delivery* & Returns" [ref=e155] [cursor=pointer]:
+      - /url: https://en.aboutyou.de/h/shipping-delivery/q-360014777500
+      - generic [ref=e157]: Free Delivery* & Returns
+    - link "30 day return policy" [ref=e158] [cursor=pointer]:
+      - /url: https://en.aboutyou.de/h/shipping-delivery/q-360014777500
+      - generic [ref=e160]: 30 day return policy
+    - link "Buy Now Pay Later" [ref=e161] [cursor=pointer]:
+      - /url: https://en.aboutyou.de/h/shipping-delivery/q-360014777500
+      - generic [ref=e163]: Buy Now Pay Later
+  - generic [ref=e174]:
+    - img [ref=e175]
+    - generic [ref=e177]:
+      - heading "Your basket is empty!" [level=1] [ref=e179]
+      - generic [ref=e180]: Add products or login
+      - button "Log in" [ref=e182] [cursor=pointer]:
+        - generic [ref=e183]: Log in
+  - generic [ref=e185]:
+    - generic [ref=e186]:
+      - generic [ref=e188]:
+        - link "Free Delivery* & Returns Free Delivery* & Returns" [ref=e189] [cursor=pointer]:
+          - /url: /h/shipping-delivery/q-360014777500
+          - img "Free Delivery* & Returns" [ref=e190]
+          - generic [ref=e191]: Free Delivery* & Returns
+        - link "30 day return policy 30 day return policy" [ref=e192] [cursor=pointer]:
+          - /url: /h/shipping-delivery/q-360014777500
+          - img "30 day return policy" [ref=e193]
+          - generic [ref=e194]: 30 day return policy
+        - link "Buy Now Pay Later Buy Now Pay Later" [ref=e195] [cursor=pointer]:
+          - /url: /h/shipping-delivery/q-360014777500
+          - img "Buy Now Pay Later" [ref=e196]
+          - generic [ref=e197]: Buy Now Pay Later
+      - generic [ref=e200]:
+        - link "Klarna" [ref=e201] [cursor=pointer]:
+          - /url: /h/payment-360003951119
+          - img "Klarna" [ref=e202]
+        - link "PayPal" [ref=e203] [cursor=pointer]:
+          - /url: /h/payment-360003951119
+          - img "PayPal" [ref=e204]
+        - link "VISA" [ref=e205] [cursor=pointer]:
+          - /url: /h/payment-360003951119
+          - img "VISA" [ref=e206]
+        - link "MasterCard" [ref=e207] [cursor=pointer]:
+          - /url: /h/payment-360003951119
+          - img "MasterCard" [ref=e208]
+        - link "Apple Pay" [ref=e209] [cursor=pointer]:
+          - /url: /h/payment-360003951119
+          - img "Apple Pay" [ref=e210]
+        - link "Google Pay" [ref=e211] [cursor=pointer]:
+          - /url: /h/payment-360003951119
+          - img "Google Pay" [ref=e212]
+        - link "DHL" [ref=e213] [cursor=pointer]:
+          - /url: /h/delivery-360003913400
+          - img "DHL" [ref=e214]
+        - link "Hermes" [ref=e215] [cursor=pointer]:
+          - /url: /h/delivery-360003913400
+          - img "Hermes" [ref=e216]
+    - generic [ref=e219]:
+      - generic [ref=e220]: Don't miss a thing!
+      - generic [ref=e221]: Sign up for the newsletter and receive exclusive offers
+      - generic [ref=e222]:
+        - group [ref=e223]:
+          - generic [ref=e224]:
+            - generic [ref=e226] [cursor=pointer]:
+              - radio "For women" [checked] [ref=e227]
+              - generic [ref=e229]: For women
+            - generic [ref=e231] [cursor=pointer]:
+              - radio "For men" [ref=e232]
+              - generic [ref=e234]: For men
+        - generic [ref=e237]:
+          - textbox "Your email address" [ref=e238]:
+            - /placeholder: " "
+          - generic: Your email address
+        - button "Sign up" [ref=e239] [cursor=pointer]:
+          - generic [ref=e240]: Sign up
+      - generic [ref=e241]:
+        - text: I would like to receive newsletters from ABOUT YOU about current trends, offers and vouchers in accordance with the
+        - link "Privacy Policy" [ref=e242] [cursor=pointer]:
+          - /url: /privacy-policy#section3.3.2.
+        - text: . You can withdraw your consent at any time with effect for the future by sending a message to
+        - link "customerservice@aboutyou.de" [ref=e243] [cursor=pointer]:
+          - /url: mailto:customerservice@aboutyou.de
+        - text: or using the unsubscribe option at the end of each newsletter.
+    - navigation [ref=e246]:
+      - generic [ref=e247]:
+        - generic [ref=e248]: Women
+        - list [ref=e249]:
+          - link "Air Jordan 1" [ref=e250] [cursor=pointer]:
+            - /url: /c/women/shoes-20207?productSeries=air-jordan-1-191134
+          - link "adidas Sneakers" [ref=e251] [cursor=pointer]:
+            - /url: /c/women/shoes/sneakers-20273?brand=adidas-originals-290
+          - link "Marc O'Polo coats" [ref=e252] [cursor=pointer]:
+            - /url: /c/women/clothing/coats-22833?brand=marc-o-polo-596
+          - link "White sweaters" [ref=e253] [cursor=pointer]:
+            - /url: /c/women/clothing/sweaters-knitwear/sweaters-22847?color=38935
+          - link "Handbags" [ref=e254] [cursor=pointer]:
+            - /url: /c/women/accessories/bags-backpacks/bags/handbags-20404
+          - link "White dress" [ref=e255] [cursor=pointer]:
+            - /url: /c/women/clothing/dresses-20236?color=38935
+          - link "Lingerie" [ref=e256] [cursor=pointer]:
+            - /url: /c/women/clothing/underwear/lingerie-220274
+          - link "Trenchcoats" [ref=e257] [cursor=pointer]:
+            - /url: /c/women/clothing/coats/trenchcoats-22837
+          - link "NIKE Air Max sneakers" [ref=e258] [cursor=pointer]:
+            - /url: /c/women/shoes/sneakers-20273?productSeries=air-max-188614
+          - link "Adidas Superstar sneakers" [ref=e259] [cursor=pointer]:
+            - /url: /c/women/shoes/sneakers-20273?productSeries=188652
+          - link "everly® Shirts & Tops" [ref=e260] [cursor=pointer]:
+            - /url: /c/women/clothing/tops-517223?brand=everly-110098
+          - link "LTB Molly jeans" [ref=e261] [cursor=pointer]:
+            - /url: /c/women/clothing/jeans-20258?productSeries=molly-188632
+          - link "Denim jackets" [ref=e262] [cursor=pointer]:
+            - /url: /c/women/clothing/jackets/denim-jackets-22828
+          - link "Pencil skirts" [ref=e263] [cursor=pointer]:
+            - /url: /c/women/clothing/skirts-20259?skirtStyle=35054
+          - link "Leather pants" [ref=e264] [cursor=pointer]:
+            - /url: /c/women/clothing/pants/leather-pants-23924
+          - link "everly® Jeans" [ref=e265] [cursor=pointer]:
+            - /url: /c/women/clothing/jeans-20258?brand=everly-110098
+          - link "everly® Dresses" [ref=e266] [cursor=pointer]:
+            - /url: /c/women/clothing/dresses-20236?brand=everly-110098
+          - link "Gold jewelry" [ref=e267] [cursor=pointer]:
+            - /url: /c/women/accessories/jewelry-69973?jewelleryMaterialStyle=56669
+          - link "Fashion for men" [ref=e268] [cursor=pointer]:
+            - /url: /c/men-20202
+          - link "Summer dresses" [ref=e269] [cursor=pointer]:
+            - /url: /c/women/clothing/dresses/summer-dresses-22794
+        - generic [ref=e270]: Brands for Women
+        - list [ref=e271]:
+          - link "everly®" [ref=e272] [cursor=pointer]:
+            - /url: /b/shop/everly-110098
+          - link "ARMEDANGELS" [ref=e273] [cursor=pointer]:
+            - /url: /b/shop/armedangels-4504
+          - link "ADIDAS PERFORMANCE" [ref=e274] [cursor=pointer]:
+            - /url: /b/shop/adidas-performance-221
+          - link "HUGO" [ref=e275] [cursor=pointer]:
+            - /url: /b/shop/hugo-3083
+          - link "BeckSöndergaard" [ref=e276] [cursor=pointer]:
+            - /url: /b/shop/becksondergaard-4399
+          - link "Chi Chi London" [ref=e277] [cursor=pointer]:
+            - /url: /b/shop/chi-chi-london-6724
+          - link "Cotton On" [ref=e278] [cursor=pointer]:
+            - /url: /b/shop/cotton-on-74033
+          - link "Dora Larsen" [ref=e279] [cursor=pointer]:
+            - /url: /b/shop/dora-larsen-74954
+          - link "DAY BIRGER ET MIKKELSEN" [ref=e280] [cursor=pointer]:
+            - /url: /b/shop/day-birger-et-mikkelsen-656
+          - link "ESPRIT" [ref=e281] [cursor=pointer]:
+            - /url: /b/shop/esprit-170
+          - link "elvine" [ref=e282] [cursor=pointer]:
+            - /url: /b/shop/elvine-819
+          - link "FRENCH CONNECTION" [ref=e283] [cursor=pointer]:
+            - /url: /b/shop/french-connection-4409
+          - link "UGG" [ref=e284] [cursor=pointer]:
+            - /url: /b/shop/ugg-1113
+          - link "Fabienne Chapot" [ref=e285] [cursor=pointer]:
+            - /url: /b/shop/fabienne-chapot-75023
+          - link "GUESS" [ref=e286] [cursor=pointer]:
+            - /url: /b/shop/guess-540
+          - link "Gestuz" [ref=e287] [cursor=pointer]:
+            - /url: /b/shop/gestuz-4414
+          - link "Haily" [ref=e288] [cursor=pointer]:
+            - /url: /b/shop/hailys-66036
+          - link "InWear" [ref=e289] [cursor=pointer]:
+            - /url: /b/shop/inwear-5277
+          - link "JJXX" [ref=e290] [cursor=pointer]:
+            - /url: /b/shop/jjxx-107406
+    - generic [ref=e291]:
+      - navigation
+    - navigation [ref=e294]:
+      - generic [ref=e295]:
+        - link "Navigate to the home page" [ref=e296] [cursor=pointer]:
+          - /url: /
+          - img [ref=e297]
+        - generic [ref=e300]:
+          - link "Social link" [ref=e301] [cursor=pointer]:
+            - /url: https://www.facebook.com/aboutyouglobal/
+            - img [ref=e302]
+          - link "Social link" [ref=e303] [cursor=pointer]:
+            - /url: https://www.instagram.com/aboutyoude/
+            - img [ref=e304]
+          - link "Social link" [ref=e305] [cursor=pointer]:
+            - /url: https://twitter.com/aboutyou_com
+            - img [ref=e306]
+          - link "Social link" [ref=e307] [cursor=pointer]:
+            - /url: https://www.youtube.com/@aboutyou_com
+            - img [ref=e308]
+          - link "Social link" [ref=e309] [cursor=pointer]:
+            - /url: https://www.pinterest.de/aboutyoude/
+            - img [ref=e310]
+          - link "Social link" [ref=e311] [cursor=pointer]:
+            - /url: https://www.tiktok.com/@aboutyou
+            - img [ref=e312]
+      - generic [ref=e313]:
+        - generic [ref=e314]: Customer care
+        - link "Help & Contact" [ref=e315] [cursor=pointer]:
+          - /url: /h
+          - generic [ref=e316]: Help & Contact
+        - link "ABOUT YOU Marketplace" [ref=e317] [cursor=pointer]:
+          - /url: https://partner.aboutyou.com/?utm_source=AYfooter
+          - generic [ref=e318]: ABOUT YOU Marketplace
+        - link "Creator Collaborations" [ref=e319] [cursor=pointer]:
+          - /url: /cp/creator-collaborations-about-you-102834
+          - generic [ref=e320]: Creator Collaborations
+        - link "Delivery area" [ref=e321] [cursor=pointer]:
+          - /url: /general-conditions
+          - generic [ref=e322]: Delivery area
+        - link "Impact Reduction" [ref=e323] [cursor=pointer]:
+          - /url: /cp/planet-100748
+          - generic [ref=e324]: Impact Reduction
+        - link "Outlet" [ref=e325] [cursor=pointer]:
+          - /url: https://aboutyou-outlet.de?utm_campaign=footer_desktop&utm_medium=shop&utm_source=aboutyou
+          - generic [ref=e326]: Outlet
+        - link "Withdraw from contract here" [ref=e327] [cursor=pointer]:
+          - /url: https://aboutyouwithdrawal.zendesk.com/hc/en-001/requests/new
+          - generic [ref=e328]: Withdraw from contract here
+      - generic [ref=e329]:
+        - generic [ref=e330]: Secure Shopping
+        - link "Your data is secure with us" [ref=e331] [cursor=pointer]:
+          - /url: https://www.rapidssl.com/
+          - img [ref=e332]
+          - generic [ref=e333]: Your data is secure with us
+      - generic [ref=e334]:
+        - generic [ref=e335]: "*Free delivery for orders above € 34.90, else shipping & service fees of € 4.90 apply."
+        - generic [ref=e336]: Lowest total price of the last 30 days before the price reduction.
+        - generic [ref=e337]: "****Free of charge from all network providers. Charges may apply when calling from abroad."
+        - generic [ref=e338]: "******All prices incl. VAT."
+    - generic [ref=e340]:
+      - navigation [ref=e341]:
+        - link "About us" [ref=e342] [cursor=pointer]:
+          - /url: https://corporate.aboutyou.de/en/
+        - link "Press" [ref=e343] [cursor=pointer]:
+          - /url: https://corporate.aboutyou.de/en/newsroom/press-releases
+        - link "Jobs" [ref=e344] [cursor=pointer]:
+          - /url: https://corporate.aboutyou.de/en/career/jobs
+        - link "Data privacy" [ref=e345] [cursor=pointer]:
+          - /url: /privacy-policy
+        - button "Preference Center (Consent management)" [ref=e346] [cursor=pointer]
+        - link "Terms of service" [ref=e347] [cursor=pointer]:
+          - /url: /general-conditions
+        - link "Legal information" [ref=e348] [cursor=pointer]:
+          - /url: /imprint
+        - link "Accessibility" [ref=e349] [cursor=pointer]:
+          - /url: /accessibility
+        - link "Product Safety" [ref=e350] [cursor=pointer]:
+          - /url: /h/product-safety-23996623440412
+      - generic [ref=e351]: © 2026 ABOUT YOU SE & Co. KG
+  - button "Scroll to top" [ref=e355] [cursor=pointer]:
+    - img [ref=e357]
+```
+
+# Test source
+
+```ts
+  71  |     await this.dismissPopups();
+  72  | 
+  73  |     try {
+  74  |       // Try to click Reject first, then fallback to Accept
+  75  |       const rejectBtn = this.page.getByRole('button', { name: /^Reject$|^Reject All$|^Ablehnen$|^Deny$/i }).last();
+  76  |       const acceptBtn = this.page.getByRole('button', { name: /^Ok$|^Accept$|^Accept All$|^Akzeptieren$/i }).last();
+  77  | 
+  78  |       if (await rejectBtn.isVisible({ timeout: 2000 }).catch(() => false)) {
+  79  |         await rejectBtn.click({ force: true });
+  80  |       } else if (await acceptBtn.isVisible({ timeout: 500 }).catch(() => false)) {
+  81  |         await acceptBtn.click({ force: true });
+  82  |       }
+  83  | 
+  84  |       // Give it a moment to disappear
+  85  |       await this.page.waitForTimeout(500);
+  86  |     } catch {
+  87  |       // No consent banner present — continue silently
+  88  |     }
+  89  |   }
+  90  | 
+  91  |   // ─── Navigation ──────────────────────────────────────────────
+  92  | 
+  93  |   /**
+  94  |    * Navigates to a URL relative to the base URL.
+  95  |    * Waits for the DOM to be fully loaded before returning.
+  96  |    * 
+  97  |    * @param path - Relative path (e.g., '/basket', '/your-shop')
+  98  |    */
+  99  |   async navigateTo(path: string): Promise<void> {
+  100 |     await this.page.goto(path, { waitUntil: 'domcontentloaded' });
+  101 |   }
+  102 | 
+  103 |   /**
+  104 |    * Returns the current page URL.
+  105 |    */
+  106 |   getCurrentUrl(): string {
+  107 |     return this.page.url();
+  108 |   }
+  109 | 
+  110 |   /**
+  111 |    * Returns the current page title.
+  112 |    */
+  113 |   async getPageTitle(): Promise<string> {
+  114 |     return this.page.title();
+  115 |   }
+  116 | 
+  117 |   // ─── Wait Utilities ──────────────────────────────────────────
+  118 | 
+  119 |   /**
+  120 |    * Waits for network idle state (no pending requests for 500ms).
+  121 |    * Useful after navigation or actions that trigger API calls.
+  122 |    * 
+  123 |    * @param timeout - Maximum wait time in ms (default: 10000)
+  124 |    */
+  125 |   async waitForNetworkIdle(timeout = 2000): Promise<void> {
+  126 |     await this.page.waitForLoadState('networkidle', { timeout }).catch(() => {
+  127 |       // It's common for live sites to never reach pure network idle due to analytics.
+  128 |       // We catch the timeout so it doesn't crash the test.
+  129 |     });
+  130 |   }
+  131 | 
+  132 |   /**
+  133 |    * Waits for a specific URL pattern to be reached.
+  134 |    * 
+  135 |    * @param urlPattern - String or RegExp to match against the URL
+  136 |    * @param timeout - Maximum wait time in ms (default: 15000)
+  137 |    */
+  138 |   async waitForUrl(urlPattern: string | RegExp, timeout = 15000): Promise<void> {
+  139 |     await this.page.waitForURL(urlPattern, { timeout });
+  140 |   }
+  141 | 
+  142 |   /**
+  143 |    * Waits for a specific API response matching the URL pattern.
+  144 |    * 
+  145 |    * @param urlPattern - String or RegExp to match the API endpoint
+  146 |    * @param timeout - Maximum wait time in ms (default: 15000)
+  147 |    * @returns The response object
+  148 |    */
+  149 |   async waitForApiResponse(urlPattern: string | RegExp, timeout = 15000) {
+  150 |     return this.page.waitForResponse(
+  151 |       (response) => {
+  152 |         const matches = typeof urlPattern === 'string'
+  153 |           ? response.url().includes(urlPattern)
+  154 |           : urlPattern.test(response.url());
+  155 |         return matches;
+  156 |       },
+  157 |       { timeout }
+  158 |     );
+  159 |   }
+  160 | 
+  161 |   // ─── Element Interaction Helpers ─────────────────────────────
+  162 | 
+  163 |   /**
+  164 |    * Safely clicks an element, waiting for it to be visible first.
+  165 |    * 
+  166 |    * @param locator - The element locator to click
+  167 |    * @param options - Optional click options
+  168 |    */
+  169 |   async safeClick(locator: Locator, options?: { timeout?: number; force?: boolean }): Promise<void> {
+  170 |     await locator.waitFor({ state: 'visible', timeout: options?.timeout || 10000 });
+> 171 |     await locator.click({ force: options?.force });
+      |                   ^ TimeoutError: locator.click: Timeout 30000ms exceeded.
+  172 |   }
+  173 | 
+  174 |   /**
+  175 |    * Fills an input field after clearing its current value.
+  176 |    * 
+  177 |    * @param locator - The input element locator
+  178 |    * @param value - The value to fill
+  179 |    */
+  180 |   async safeFill(locator: Locator, value: string): Promise<void> {
+  181 |     await locator.waitFor({ state: 'visible', timeout: 10000 });
+  182 |     await locator.clear();
+  183 |     await locator.fill(value);
+  184 |   }
+  185 | 
+  186 |   /**
+  187 |    * Gets the text content of an element, trimmed of whitespace.
+  188 |    * 
+  189 |    * @param locator - The element locator
+  190 |    * @returns Trimmed text content or empty string
+  191 |    */
+  192 |   async getTextContent(locator: Locator): Promise<string> {
+  193 |     const text = await locator.textContent();
+  194 |     return text?.trim() || '';
+  195 |   }
+  196 | 
+  197 |   /**
+  198 |    * Checks if an element is visible on the page.
+  199 |    * 
+  200 |    * @param locator - The element locator
+  201 |    * @param timeout - Maximum wait time in ms (default: 5000)
+  202 |    * @returns true if visible, false otherwise
+  203 |    */
+  204 |   async isElementVisible(locator: Locator, timeout = 5000): Promise<boolean> {
+  205 |     try {
+  206 |       await locator.waitFor({ state: 'visible', timeout });
+  207 |       return true;
+  208 |     } catch {
+  209 |       return false;
+  210 |     }
+  211 |   }
+  212 | 
+  213 |   /**
+  214 |    * Scrolls to the bottom of the page (useful for lazy-loaded content).
+  215 |    */
+  216 |   async scrollToBottom(): Promise<void> {
+  217 |     await this.page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+  218 |     // Allow time for lazy-loaded content
+  219 |     await this.page.waitForTimeout(1000);
+  220 |   }
+  221 | 
+  222 |   /**
+  223 |    * Takes a screenshot for debugging purposes.
+  224 |    * 
+  225 |    * @param name - Descriptive name for the screenshot file
+  226 |    */
+  227 |   async takeScreenshot(name: string): Promise<void> {
+  228 |     await this.page.screenshot({ path: `test-results/screenshots/${name}.png`, fullPage: true });
+  229 |   }
+  230 | }
+  231 | 
+```

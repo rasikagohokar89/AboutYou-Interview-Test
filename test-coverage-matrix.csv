@@ -1,0 +1,78 @@
+ID,File,Suite,Test Name,Tags,Priority,Type,Status,Area
+TC-001,navigation.spec.ts,Navigation,should have main navigation with category links,@smoke,P1,UI Verification,Active,Navigation
+TC-002,navigation.spec.ts,Navigation,should navigate to basket page,@smoke @regression,P1,Functional,Active,Navigation
+TC-003,navigation.spec.ts,Navigation,should allow searching for a product,@smoke @regression,P1,Functional,Active,Search
+TC-004,navigation.spec.ts,Navigation,should navigate to a category page when clicking a category link,@regression,P2,Functional,Active,Navigation
+TC-005,navigation.spec.ts,Navigation,should have wishlist link,@regression,P2,UI Verification,Active,Wishlist
+TC-006,search-and-browse.spec.ts,Search & Browse > Homepage,should load homepage with key elements,@smoke,P1,UI Verification,Active,Homepage
+TC-007,search-and-browse.spec.ts,Search & Browse > Homepage,should have correct page title,@regression,P2,UI Verification,Active,Homepage
+TC-008,search-and-browse.spec.ts,Search & Browse > Search,should return results for valid search query,@smoke @regression,P1,Functional,Active,Search
+TC-009,search-and-browse.spec.ts,Search & Browse > Search,should handle search with no results,@negative,P2,Negative,Active,Search
+TC-010,search-and-browse.spec.ts,Search & Browse > Security,should handle XSS attempt in search,@negative @edge-case,P2,Security,Active,Search
+TC-011,search-and-browse.spec.ts,Search & Browse > Security,should handle SQL injection attempt in search,@negative @edge-case,P2,Security,Active,Search
+TC-012,search-and-browse.spec.ts,Search & Browse > PDP,should display product information on PDP,@smoke @regression,P1,UI Verification,Active,PDP
+TC-013,search-and-browse.spec.ts,Search & Browse > PDP,should have selectable size options,@regression,P2,UI Verification,Active,PDP
+TC-014,search-and-browse.spec.ts,Search & Browse > PDP,should display product images,@regression,P2,UI Verification,Active,PDP
+TC-015,search-filters.spec.ts,Search Filters > Filter Panel,should display filter button on search results page,@smoke,P1,UI Verification,Active,Filters
+TC-016,search-filters.spec.ts,Search Filters > Filter Panel,should display sort dropdown,@smoke,P1,UI Verification,Active,Filters
+TC-017,search-filters.spec.ts,Search Filters > Filter Categories,should display "Brand" filter category,@regression,P2,UI Verification,Active,Filters
+TC-018,search-filters.spec.ts,Search Filters > Filter Categories,should display "Color" filter category,@regression,P2,UI Verification,Active,Filters
+TC-019,search-filters.spec.ts,Search Filters > Filter Categories,should display "Size" filter category,@regression,P2,UI Verification,Active,Filters
+TC-020,search-filters.spec.ts,Search Filters > Filter Categories,should display "Price" filter category,@regression,P2,UI Verification,Active,Filters
+TC-021,search-filters.spec.ts,Search Filters > Filter Categories,should display "Category" filter category,@regression,P3,UI Verification,Active,Filters
+TC-022,search-filters.spec.ts,Search Filters > Filter Categories,should display "Fit" filter category,@regression,P3,UI Verification,Active,Filters
+TC-023,search-filters.spec.ts,Search Filters > Filter Categories,should display "Material" filter category,@regression,P3,UI Verification,Active,Filters
+TC-024,search-filters.spec.ts,Search Filters > Filter Categories,should display "Length" filter category,@regression,P3,UI Verification,Active,Filters
+TC-025,search-filters.spec.ts,Search Filters > Filter Categories,should display "Pattern" filter category,@regression,P3,UI Verification,Active,Filters
+TC-026,search-filters.spec.ts,Search Filters > Filter Categories,should display "Sustainability" filter category,@regression,P3,UI Verification,Active,Filters
+TC-027,search-filters.spec.ts,Search Filters > Apply Filters,should filter products by Color,@regression,P2,Functional,Active,Filters
+TC-028,search-filters.spec.ts,Search Filters > Apply Filters,should filter products by Size,@regression,P2,Functional,Active,Filters
+TC-029,search-filters.spec.ts,Search Filters > Clear Filters,should clear all filters and restore original results,@regression,P2,Functional,Active,Filters
+TC-030,element-verification.spec.ts,Element Verification > Homepage,should verify all key elements on homepage,@smoke,P1,UI Verification,Active,Homepage
+TC-031,element-verification.spec.ts,Element Verification > Homepage,should verify brand and category links are clickable,@regression,P2,UI Verification,Active,Homepage
+TC-032,element-verification.spec.ts,Element Verification > Homepage,should verify language change works,@regression,P2,Functional,Active,Localization
+TC-033,element-verification.spec.ts,Element Verification > PDP,should verify all elements on PDP,@regression,P1,UI Verification,Active,PDP
+TC-034,element-verification.spec.ts,Element Verification > Basket,should verify all elements on basket page with items,@regression,P1,UI Verification,Active,Basket
+TC-035,element-verification.spec.ts,Element Verification > Checkout Shipping,should verify all elements on checkout shipping tab,@regression,P1,UI Verification,Active,Checkout
+TC-036,element-verification.spec.ts,Element Verification > Checkout Payment,should verify all elements on checkout payment tab,@regression,P1,UI Verification,Active,Checkout
+TC-037,wishlist.spec.ts,Wishlist > Add to Wishlist,should add a product to the wishlist from PDP,@smoke @regression,P1,Functional,Active,Wishlist
+TC-038,wishlist.spec.ts,Wishlist > Add to Wishlist,should show updated wishlist badge count in header,@regression,P2,UI Verification,Active,Wishlist
+TC-039,wishlist.spec.ts,Wishlist > Wishlist Page,should display products in the wishlist page with correct details,@regression,P2,UI Verification,Active,Wishlist
+TC-040,wishlist.spec.ts,Wishlist > Wishlist Page,should verify all clickable elements on wishlist page,@regression,P2,UI Verification,Active,Wishlist
+TC-041,wishlist.spec.ts,Wishlist > Wishlist Page,should remove a product from the wishlist,@regression,P2,Functional,Active,Wishlist
+TC-042,cart-management.spec.ts,Cart Management > Add to Cart,Add items to basket and verify details - DE,@regression,P1,Functional,Active,Basket
+TC-043,cart-management.spec.ts,Cart Management > Remove from Cart,Add 2 items to cart remove one and verify prices,@regression,P1,Functional,Active,Basket
+TC-044,cart-management.spec.ts,Cart Management > Quantity,should update item quantity and verify price calculations,@regression,P1,Functional,Active,Basket
+TC-045,cart-management.spec.ts,Cart Management > Persistence,should persist cart across page navigation,@regression,P2,Functional,Active,Basket
+TC-046,cart-management.spec.ts,Cart Management > Checkout Flow,Proceed to checkout without login verify login window,@regression,P1,Functional,Skipped,Basket
+TC-047,cart-management.spec.ts,Cart Management > Negative,should prompt for size selection when adding without a size,@negative,P2,Negative,Active,Basket
+TC-048,cart-management.spec.ts,Cart Management > Negative,should not allow increasing quantity beyond maximum,@negative,P2,Negative,Active,Basket
+TC-049,cart-management.spec.ts,Cart Management > Negative,Empty cart message should be displayed,@negative,P2,Negative,Active,Basket
+TC-050,cart-management.spec.ts,Cart Management > Edge Cases,should handle currency format correctly EUR,@edge-case,P3,Edge Case,Active,Basket
+TC-051,cart-management.spec.ts,Cart Management > Edge Cases,should show correct basket count in header badge,@edge-case,P2,Edge Case,Active,Basket
+TC-052,address-validation.spec.ts,Address Validation > Valid,Provide DE address and verify checkout continues,@regression,P1,Functional,Active,Checkout
+TC-053,address-validation.spec.ts,Address Validation > Valid,Provide AT address and verify checkout continues,@regression,P2,Functional,Active,Checkout
+TC-054,address-validation.spec.ts,Address Validation > Invalid,should show errors for empty required fields,@regression @negative,P1,Negative,Active,Checkout
+TC-055,address-validation.spec.ts,Address Validation > Edge Cases,Verify continue button disabled when no collection point selected,@edge-case,P2,Edge Case,Active,Checkout
+TC-056,checkout-flow.spec.ts,Checkout Flow,Verify complete checkout process with mocked payment,@smoke @regression,P1,E2E,Active,Checkout
+TC-057,checkout-flow.spec.ts,Checkout Flow,Verify checkout process with declined payment,@smoke @regression,P1,E2E,Active,Checkout
+TC-058,checkout-flow.spec.ts,Checkout Flow,Verify card payment error with invalid card details,@regression,P1,Negative,Active,Checkout
+TC-059,checkout-edge-cases.spec.ts,Checkout Edge Cases,should handle browser back button during checkout,@regression @edge-case,P2,Edge Case,Active,Checkout
+TC-060,checkout-edge-cases.spec.ts,Checkout Edge Cases,should handle page refresh during checkout,@regression @edge-case,P2,Edge Case,Active,Checkout
+TC-061,checkout-edge-cases.spec.ts,Checkout Edge Cases,should handle navigating away and returning,@regression @edge-case,P2,Edge Case,Active,Checkout
+TC-062,order-summary.spec.ts,Order Summary,Verify order summary displays correct product details,@regression,P1,UI Verification,Active,Checkout
+TC-063,order-summary.spec.ts,Order Summary,Verify order summary total matches basket total,@regression,P1,Functional,Active,Checkout
+TC-064,voucher-promo.spec.ts,Voucher > Valid Codes,Provide valid voucher code and verify it is applied,@positive @regression,P1,Functional,Active,Checkout
+TC-065,voucher-promo.spec.ts,Voucher > Invalid Codes,Provide invalid voucher code and verify not applied,@negative @regression,P1,Negative,Active,Checkout
+TC-066,payment-handling.spec.ts,Payment > Success,should handle successful payment,@smoke @regression,P1,E2E,Active,Payment
+TC-067,payment-handling.spec.ts,Payment > Failures,should handle payment gateway timeout,@edge-case,P2,Edge Case,Skipped,Payment
+TC-068,payment-handling.spec.ts,Payment > Failures,should handle network error during payment,@edge-case,P3,Edge Case,Active,Payment
+TC-069,payment-handling.spec.ts,Payment > Failures,should handle 3D Secure challenge,@edge-case,P3,Edge Case,Active,Payment
+TC-070,guest-vs-auth.spec.ts,Guest vs Auth > Unauthenticated,should redirect to login when checkout attempted,@smoke @regression,P1,Functional,Skipped,Auth
+TC-071,guest-vs-auth.spec.ts,Guest vs Auth > Unauthenticated,should preserve cart contents after login,@regression,P1,Functional,Skipped,Auth
+TC-072,guest-vs-auth.spec.ts,Guest vs Auth > Guest Checkout,should check for guest checkout availability,@regression,P2,Functional,Skipped,Auth
+TC-073,guest-vs-auth.spec.ts,Guest vs Auth > Authenticated,should proceed directly to checkout when logged in,@smoke @regression,P1,Functional,Skipped,Auth
+TC-074,guest-vs-auth.spec.ts,Guest vs Auth > Authenticated,should display social login options on login page,@regression,P2,UI Verification,Skipped,Auth
+TC-075,checkout-api-validation.spec.ts,API Validation,should capture API calls when loading basket page,@regression @api,P2,API,Active,API
+TC-076,checkout-api-validation.spec.ts,API Validation,Verify address suggestion on providing street in shipping,@api,P2,API,Skipped,API
+TC-077,checkout-api-validation.spec.ts,API Validation,Verify API response when incorrect address provided,@api,P2,API,Skipped,API

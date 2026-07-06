@@ -1,0 +1,230 @@
+/**
+ * @fileoverview Abstract base page class for the Page Object Model.
+ * Provides common utilities shared across all page objects:
+ * - Cookie consent handling
+ * - Navigation helpers
+ * - Wait utilities
+ * - Element interaction wrappers
+ * 
+ * All page objects extend this class to inherit common functionality
+ * and enforce a consistent interface pattern.
+ */
+
+import { type Page, type Locator, expect } from '@playwright/test';
+
+export abstract class BasePage {
+  /** The Playwright page instance */
+  protected readonly page: Page;
+
+  /** Cookie consent banner selectors */
+  private readonly cookieConsentButton: Locator;
+  private readonly cookieRejectButton: Locator;
+
+  constructor(page: Page) {
+    this.page = page;
+    this.cookieConsentButton = page.getByRole('button', { name: /accept|ok|agree|akzeptieren|allow/i });
+    this.cookieRejectButton = page.getByRole('button', { name: /reject|deny|ablehnen/i });
+  }
+
+  // ─── Popups & Cookies ────────────────────────────────────────
+
+  /**
+   * Dismisses disruptive popups like the Country/Language switcher.
+   * Does not fail if no popup is found.
+   */
+  async dismissPopups(): Promise<void> {
+    try {
+      // Look for the continue shopping button
+      const countryPopup = this.page.getByRole('button', { name: /Continue shopping on|Weiter einkaufen|Pokračovat/i }).last();
+      if (await countryPopup.isVisible({ timeout: 500 }).catch(() => false)) {
+        await countryPopup.click({ force: true });
+        await this.page.waitForTimeout(500);
+      }
+      
+      // Look for promotional popups like "Základní letní kousky"
+      const closePopup = this.page.getByRole('button', { name: /^Zavřít$|^Close$|^Schließen$/i }).first();
+      if (await closePopup.isVisible({ timeout: 500 }).catch(() => false)) {
+        await closePopup.click({ force: true });
+        await this.page.waitForTimeout(500);
+      }
+      
+      // Look for Language and Country popup
+      const langPopup = this.page.locator('text=Language and Country, text=Sprache und Land').first();
+      if (await langPopup.isVisible({ timeout: 500 }).catch(() => false)) {
+        const englishBtn = this.page.getByRole('button', { name: /^English$/i }).first();
+        if (await englishBtn.isVisible().catch(() => false)) {
+          await englishBtn.click({ force: true });
+        } else {
+          await this.page.keyboard.press('Escape');
+        }
+        await this.page.waitForTimeout(500);
+      }
+    } catch {
+      // Ignore errors
+    }
+  }
+
+  /**
+   * Dismisses the cookie consent banner and other initial popups.
+   */
+  async dismissCookieConsent(): Promise<void> {
+    await this.dismissPopups();
+
+    try {
+      // Try to click Reject first, then fallback to Accept
+      const rejectBtn = this.page.getByRole('button', { name: /^Reject$|^Reject All$|^Ablehnen$|^Deny$/i }).last();
+      const acceptBtn = this.page.getByRole('button', { name: /^Ok$|^Accept$|^Accept All$|^Akzeptieren$/i }).last();
+
+      if (await rejectBtn.isVisible({ timeout: 2000 }).catch(() => false)) {
+        await rejectBtn.click({ force: true });
+      } else if (await acceptBtn.isVisible({ timeout: 500 }).catch(() => false)) {
+        await acceptBtn.click({ force: true });
+      }
+
+      // Give it a moment to disappear
+      await this.page.waitForTimeout(500);
+    } catch {
+      // No consent banner present — continue silently
+    }
+  }
+
+  // ─── Navigation ──────────────────────────────────────────────
+
+  /**
+   * Navigates to a URL relative to the base URL.
+   * Waits for the DOM to be fully loaded before returning.
+   * 
+   * @param path - Relative path (e.g., '/basket', '/your-shop')
+   */
+  async navigateTo(path: string): Promise<void> {
+    await this.page.goto(path, { waitUntil: 'domcontentloaded' });
+  }
+
+  /**
+   * Returns the current page URL.
+   */
+  getCurrentUrl(): string {
+    return this.page.url();
+  }
+
+  /**
+   * Returns the current page title.
+   */
+  async getPageTitle(): Promise<string> {
+    return this.page.title();
+  }
+
+  // ─── Wait Utilities ──────────────────────────────────────────
+
+  /**
+   * Waits for network idle state (no pending requests for 500ms).
+   * Useful after navigation or actions that trigger API calls.
+   * 
+   * @param timeout - Maximum wait time in ms (default: 10000)
+   */
+  async waitForNetworkIdle(timeout = 2000): Promise<void> {
+    await this.page.waitForLoadState('networkidle', { timeout }).catch(() => {
+      // It's common for live sites to never reach pure network idle due to analytics.
+      // We catch the timeout so it doesn't crash the test.
+    });
+  }
+
+  /**
+   * Waits for a specific URL pattern to be reached.
+   * 
+   * @param urlPattern - String or RegExp to match against the URL
+   * @param timeout - Maximum wait time in ms (default: 15000)
+   */
+  async waitForUrl(urlPattern: string | RegExp, timeout = 15000): Promise<void> {
+    await this.page.waitForURL(urlPattern, { timeout });
+  }
+
+  /**
+   * Waits for a specific API response matching the URL pattern.
+   * 
+   * @param urlPattern - String or RegExp to match the API endpoint
+   * @param timeout - Maximum wait time in ms (default: 15000)
+   * @returns The response object
+   */
+  async waitForApiResponse(urlPattern: string | RegExp, timeout = 15000) {
+    return this.page.waitForResponse(
+      (response) => {
+        const matches = typeof urlPattern === 'string'
+          ? response.url().includes(urlPattern)
+          : urlPattern.test(response.url());
+        return matches;
+      },
+      { timeout }
+    );
+  }
+
+  // ─── Element Interaction Helpers ─────────────────────────────
+
+  /**
+   * Safely clicks an element, waiting for it to be visible first.
+   * 
+   * @param locator - The element locator to click
+   * @param options - Optional click options
+   */
+  async safeClick(locator: Locator, options?: { timeout?: number; force?: boolean }): Promise<void> {
+    await locator.waitFor({ state: 'visible', timeout: options?.timeout || 10000 });
+    await locator.click({ force: options?.force });
+  }
+
+  /**
+   * Fills an input field after clearing its current value.
+   * 
+   * @param locator - The input element locator
+   * @param value - The value to fill
+   */
+  async safeFill(locator: Locator, value: string): Promise<void> {
+    await locator.waitFor({ state: 'visible', timeout: 10000 });
+    await locator.clear();
+    await locator.fill(value);
+  }
+
+  /**
+   * Gets the text content of an element, trimmed of whitespace.
+   * 
+   * @param locator - The element locator
+   * @returns Trimmed text content or empty string
+   */
+  async getTextContent(locator: Locator): Promise<string> {
+    const text = await locator.textContent();
+    return text?.trim() || '';
+  }
+
+  /**
+   * Checks if an element is visible on the page.
+   * 
+   * @param locator - The element locator
+   * @param timeout - Maximum wait time in ms (default: 5000)
+   * @returns true if visible, false otherwise
+   */
+  async isElementVisible(locator: Locator, timeout = 5000): Promise<boolean> {
+    try {
+      await locator.waitFor({ state: 'visible', timeout });
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  /**
+   * Scrolls to the bottom of the page (useful for lazy-loaded content).
+   */
+  async scrollToBottom(): Promise<void> {
+    await this.page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+    // Allow time for lazy-loaded content
+    await this.page.waitForTimeout(1000);
+  }
+
+  /**
+   * Takes a screenshot for debugging purposes.
+   * 
+   * @param name - Descriptive name for the screenshot file
+   */
+  async takeScreenshot(name: string): Promise<void> {
+    await this.page.screenshot({ path: `test-results/screenshots/${name}.png`, fullPage: true });
+  }
+}

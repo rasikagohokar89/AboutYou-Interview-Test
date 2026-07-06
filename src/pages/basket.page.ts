@@ -1,0 +1,347 @@
+/**
+ * @fileoverview Basket/Cart page object — a core page for checkout testing.
+ * Handles all cart management operations: item manipulation,
+ * quantity updates, voucher application, and order summary validation.
+ * This is the primary gateway to the checkout flow.
+ */
+
+import { type Page, type Locator } from '@playwright/test';
+import { BasePage } from './base.page';
+import type { CartItemUIData } from '../types/cart.types';
+
+export class BasketPage extends BasePage {
+  // ─── Locators ────────────────────────────────────────────────
+
+  /** Cart item containers */
+  readonly cartItems: Locator;
+
+  /** Item name/title within cart items */
+  readonly itemNames: Locator;
+
+  /** Item brand within cart items */
+  readonly itemBrands: Locator;
+
+  /** Item size within cart items */
+  readonly itemSizes: Locator;
+
+  /** Item price within cart items */
+  readonly itemPrices: Locator;
+
+  /** Item images */
+  readonly itemImages: Locator;
+
+  /** Quantity increase button */
+  readonly quantityIncrease: Locator;
+
+  /** Quantity decrease button */
+  readonly quantityDecrease: Locator;
+
+  /** Quantity display/input */
+  readonly quantityDisplay: Locator;
+
+  /** Remove item button */
+  readonly removeItemButton: Locator;
+
+  /** Order summary subtotal */
+  readonly subtotal: Locator;
+
+  /** Shipping cost display */
+  readonly shippingCost: Locator;
+
+  /** Discount/savings display */
+  readonly discountAmount: Locator;
+
+  /** Order total */
+  readonly orderTotal: Locator;
+
+  /** Free shipping threshold message */
+  readonly freeShippingMessage: Locator;
+
+  /** Voucher/promo code input */
+  readonly voucherInput: Locator;
+
+  /** Apply voucher button */
+  readonly applyVoucherButton: Locator;
+
+  /** Voucher error message */
+  readonly voucherError: Locator;
+
+  /** Voucher success message */
+  readonly voucherSuccess: Locator;
+
+  /** Applied voucher display */
+  readonly appliedVoucher: Locator;
+
+  /** Remove voucher button */
+  readonly removeVoucherButton: Locator;
+
+  /** Proceed to checkout CTA */
+  readonly checkoutButton: Locator;
+
+  /** Continue shopping link */
+  readonly continueShoppingLink: Locator;
+
+  /** Empty cart message */
+  readonly emptyCartMessage: Locator;
+
+  /** Empty cart CTA (go shopping) */
+  readonly emptyCartCTA: Locator;
+
+  /** Payment methods displayed in the basket */
+  readonly paymentMethods: Locator;
+
+  constructor(page: Page) {
+    super(page);
+
+    // Cart items
+    // The number of items in the cart exactly equals the number of remove buttons.
+    this.removeItemButton = page.getByRole('button', { name: /remove|delete|löschen|entfernen/i });
+    // We get the specific item container by finding the closest ancestor div of the remove button that contains a product link.
+    this.cartItems = this.removeItemButton.locator('xpath=ancestor::div[.//a[contains(@href, "/p/")]][1]');
+
+    this.itemNames = page.locator('a[href*="/p/"]');
+    this.itemBrands = page.locator('span[class*="brand"]');
+    this.itemSizes = page.getByText(/Size|Größe/i);
+    this.itemPrices = page.getByText(/€/).first();
+    this.itemImages = page.getByRole('img');
+
+    // Quantity controls
+    this.quantityIncrease = page.getByTestId('productQtyIncreaseButton').first();
+    this.quantityDecrease = page.getByTestId('productQtyDecreaseButton').first();
+    this.quantityDisplay = page.locator('input[type="number"], select').first();
+
+    // Remove item 
+    this.removeItemButton = page.getByRole('button', { name: /remove|delete|löschen|entfernen/i });
+
+    // Order summary
+    this.subtotal = page.locator('div, span, p').filter({ hasText: /^(?:Subtotal|Total|Zwischensumme)/i }).last();
+    this.shippingCost = page.locator('div, span, p').filter({ hasText: /^(?:Shipping|Versand)/i }).last();
+    this.discountAmount = page.locator('div, span, p').filter({ hasText: /Discount|Rabatt/i }).last();
+    this.orderTotal = page.locator('div, li, p').filter({ hasText: /You pay|Du zahlst|Total/i }).last();
+    this.freeShippingMessage = page.getByText(/free shipping/i).first();
+
+
+    // Voucher/promo code
+    this.voucherInput = page.getByRole('textbox').filter({ hasText: /voucher|promo/i }).first();
+    this.applyVoucherButton = page.getByRole('button', { name: /Apply|Einlösen/i }).first();
+    this.voucherError = page.getByText(/error/i).first();
+    this.voucherSuccess = page.getByText(/success/i).first();
+    this.appliedVoucher = page.getByText(/applied/i).first();
+    this.removeVoucherButton = page.getByRole('button', { name: /remove voucher/i }).first();
+
+    // CTAs
+    this.checkoutButton = page.getByRole('button', { name: /checkout|Kasse|objednávce/i }).or(page.getByRole('link', { name: /checkout|Kasse|objednávce/i })).first();
+    this.continueShoppingLink = page.getByRole('link', { name: /Continue shopping|Weiter einkaufen|Pokračovat/i }).first();
+
+    // Empty state
+    this.emptyCartMessage = page.getByText(/basket is empty|Warenkorb ist leer|košík je prázdný/i).first();
+    this.emptyCartCTA = page.getByRole('link', { name: /Go shopping|Shoppen|Nakupovat/i }).first();
+
+    // Payment methods
+    this.paymentMethods = page.locator('img[alt*="Klarna"], img[alt*="PayPal"], img[alt*="VISA"], img[alt*="MasterCard"], img[alt*="Apple Pay"], img[alt*="Google Pay"]');
+  }
+
+  // ─── Actions ─────────────────────────────────────────────────
+
+  /**
+   * Opens the basket page directly.
+   */
+  async open(): Promise<void> {
+    await this.navigateTo('/basket');
+    await this.dismissCookieConsent();
+    await this.page.waitForTimeout(2000);
+  }
+
+  /**
+   * Returns the number of line items in the cart.
+   */
+  async getItemCount(): Promise<number> {
+    return this.cartItems.count();
+  }
+
+  /**
+   * Checks if the cart is empty.
+   */
+  async isEmpty(): Promise<boolean> {
+    const itemCount = await this.getItemCount();
+    return itemCount === 0 || await this.isElementVisible(this.emptyCartMessage, 3000);
+  }
+
+  /**
+   * Extracts UI data for a specific cart item.
+   * 
+   * @param index - Zero-based index of the cart item
+   * @returns CartItemUIData with extracted information
+   */
+  async getCartItemData(index: number): Promise<CartItemUIData> {
+    const item = this.cartItems.nth(index);
+
+    return {
+      name: await item.locator('a[href*="/p/"]').allTextContents().then(texts => texts.join(' ').trim()),
+      brand: await item.locator('[class*="brand"], [data-testid*="brand"]').first().textContent({ timeout: 2000 }).then(t => t?.trim() || '').catch(() => ''),
+      size: await item.getByText(/Size|Größe/i).first().textContent({ timeout: 2000 }).then(t => t?.trim() || '').catch(() => ''),
+      quantity: await item.locator('select, input[type="number"]').first().inputValue({ timeout: 2000 }).then(v => parseInt(v, 10)).catch(() => 1),
+      price: await item.getByText(/€/).first().textContent({ timeout: 2000 }).then(t => t?.trim() || '').catch(() => ''),
+      imageVisible: await this.isElementVisible(item.locator('img').first(), 3000),
+    };
+  }
+
+  /**
+   * Increases the quantity for a specific cart item.
+   * 
+   * @param index - Zero-based index of the cart item
+   */
+  async increaseQuantity(index: number): Promise<void> {
+    const item = this.cartItems.nth(index);
+    try {
+      // Try the standard locator first
+      const increaseBtn = item.locator('button:has-text("+"), [aria-label*="ncrease"], [data-testid*="ncrease"], [class*="ncrease"], [data-testid*="plus"]').first();
+      await increaseBtn.click({ timeout: 2000, force: true });
+    } catch {
+      // Structural fallback: find the element displaying the quantity (often between - and + buttons)
+      await item.evaluate((el) => {
+        const buttons = Array.from(el.querySelectorAll('button'));
+        if (buttons.length >= 2) {
+          buttons[1].click(); // Usually the second button is +
+          return;
+        }
+        throw new Error("Could not find increase quantity button");
+      });
+    }
+    await this.page.waitForTimeout(2000); // Wait for recalculation
+  }
+
+  /**
+   * Checks if the increase quantity button is disabled for a specific cart item.
+   * 
+   * @param index - Zero-based index of the cart item
+   */
+  async isIncreaseQuantityDisabled(index: number): Promise<boolean> {
+    const item = this.cartItems.nth(index);
+    const increaseBtn = item.locator('button:has-text("+"), [aria-label*="ncrease"], [data-testid*="ncrease"], [class*="ncrease"], [data-testid*="plus"], button:nth-of-type(2)').first();
+    const isDisabled = await increaseBtn.isDisabled().catch(() => false);
+    const hasDisabledAttr = await increaseBtn.getAttribute('disabled').then(v => v !== null).catch(() => false);
+    const hasAriaDisabled = await increaseBtn.getAttribute('aria-disabled').then(v => v === 'true').catch(() => false);
+
+    return isDisabled || hasDisabledAttr || hasAriaDisabled;
+  }
+
+  /**
+   * Decreases the quantity for a specific cart item.
+   * 
+   * @param index - Zero-based index of the cart item
+   */
+  async decreaseQuantity(index: number): Promise<void> {
+    const item = this.cartItems.nth(index);
+    try {
+      const decreaseBtn = item.locator('button:has-text("-"), [aria-label*="ecrease"], [data-testid*="ecrease"], [class*="ecrease"], [data-testid*="minus"]').first();
+      await decreaseBtn.click({ timeout: 2000, force: true });
+    } catch {
+      await item.evaluate((el) => {
+        const ones = Array.from(el.querySelectorAll('span, div, p')).filter(e => e.textContent?.trim() === '1');
+        for (const one of ones) {
+          const prev = one.previousElementSibling;
+          if (prev) {
+            (prev as HTMLElement).click();
+            return;
+          }
+        }
+        throw new Error("Could not find decrease quantity button");
+      });
+    }
+    await this.page.waitForTimeout(2000);
+  }
+
+  /**
+   * Removes a specific item from the cart.
+   * 
+   * @param index - Zero-based index of the cart item to remove
+   */
+  async removeItem(index: number): Promise<void> {
+    await this.safeClick(this.removeItemButton.nth(index));
+    await this.page.waitForTimeout(1500);
+  }
+
+  /**
+   * Removes all items from the cart.
+   */
+  async clearCart(): Promise<void> {
+    let attempts = 0;
+    while (await this.getItemCount() > 0 && attempts < 10) {
+      await this.removeItem(0);
+      attempts++;
+    }
+  }
+
+  async extractValueWithFallback(loc: Locator): Promise<string> {
+    // 1. Check parent
+    const parent = loc.locator('..');
+    const parentText = await this.getTextContent(parent);
+    if (/\d/.test(parentText)) return parentText;
+
+    // 2. Check next sibling of the label
+    const sibling = loc.locator('+ *');
+    if (await sibling.count() > 0) {
+      const siblingText = await this.getTextContent(sibling);
+      if (/\d/.test(siblingText)) return siblingText;
+    }
+
+    // 3. Check next sibling of the parent
+    const parentSibling = parent.locator('+ *');
+    if (await parentSibling.count() > 0) {
+      const parentSiblingText = await this.getTextContent(parentSibling);
+      if (/\d/.test(parentSiblingText)) return parentSiblingText;
+    }
+
+    return parentText;
+  }
+
+  async getOrderTotal(): Promise<string> {
+    return await this.extractValueWithFallback(this.orderTotal);
+  }
+
+  async getSubtotal(): Promise<string> {
+    return await this.extractValueWithFallback(this.subtotal);
+  }
+
+  async getShippingCost(): Promise<string> {
+    return await this.extractValueWithFallback(this.shippingCost);
+  }
+
+  async getDiscountAmount(): Promise<string> {
+    return await this.extractValueWithFallback(this.discountAmount);
+  }
+
+  /**
+   * Applies a voucher/promo code.
+   * 
+   * @param code - The voucher code to apply
+   */
+  async applyVoucher(code: string): Promise<void> {
+    await this.safeFill(this.voucherInput, code);
+    await this.safeClick(this.applyVoucherButton);
+    await this.page.waitForTimeout(2000); // Wait for validation
+  }
+
+  /**
+   * Checks if a voucher error is displayed.
+   */
+  async hasVoucherError(): Promise<boolean> {
+    return this.isElementVisible(this.voucherError, 3000);
+  }
+
+  /**
+   * Gets the voucher error message text.
+   */
+  async getVoucherErrorMessage(): Promise<string> {
+    return this.getTextContent(this.voucherError);
+  }
+
+  /**
+   * Clicks the "Proceed to checkout" button.
+   */
+  async proceedToCheckout(): Promise<void> {
+    await this.safeClick(this.checkoutButton);
+    await this.waitForNetworkIdle();
+  }
+}

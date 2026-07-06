@@ -1,0 +1,180 @@
+/**
+ * @fileoverview Custom Playwright test fixtures for the About You checkout suite.
+ * 
+ * Provides:
+ * - Pre-instantiated Page Object Model instances for all pages
+ * - Automatic cookie consent dismissal via beforeEach hook
+ * - `withProductInCart` fixture that sets up a cart with a product (reusable setup)
+ * - `authenticatedPage` fixture that uses stored auth state
+ * 
+ * Usage:
+ *   import { test, expect } from '../src/fixtures/test.fixtures';
+ *   test('my test', async ({ basketPage, checkoutPage }) => { ... });
+ */
+
+import { test as base, expect, type Page } from '@playwright/test';
+import { HomePage } from '../pages/home.page';
+import { ProductListingPage } from '../pages/product-listing.page';
+import { ProductDetailPage } from '../pages/product-detail.page';
+import { BasketPage } from '../pages/basket.page';
+import { CheckoutPage } from '../pages/checkout.page';
+import { LoginPage } from '../pages/login.page';
+import { TestConfig } from '../config/test.config';
+
+export type TestOptions = {
+  /** Array of search queries for products to add to the cart */
+  productsToAdd: string[];
+};
+
+/**
+ * Type definition for all custom fixtures.
+ * Extends Playwright's base test with POM instances and setup utilities.
+ */
+interface TestFixtures extends TestOptions {
+  /** Homepage page object */
+  homePage: HomePage;
+  /** Product listing page object */
+  productListingPage: ProductListingPage;
+  /** Product detail page object */
+  productDetailPage: ProductDetailPage;
+  /** Basket/cart page object */
+  basketPage: BasketPage;
+  /** Checkout page object */
+  checkoutPage: CheckoutPage;
+  /** Login page object */
+  loginPage: LoginPage;
+  /** Pre-configured page with a product already in the cart */
+  pageWithProductsInCart: Page;
+}
+
+/**
+ * Extended test instance with custom fixtures.
+ * All page objects are lazily instantiated and share the same page instance.
+ */
+export const test = base.extend<TestFixtures>({
+  productsToAdd: [['dress'], { option: true }],
+
+  /**
+   * HomePage fixture — instantiated from the current page.
+   * Automatically dismisses cookie consent on first use.
+   */
+  homePage: async ({ page }, use) => {
+    const homePage = new HomePage(page);
+    await use(homePage);
+  },
+
+  /**
+   * ProductListingPage fixture.
+   */
+  productListingPage: async ({ page }, use) => {
+    const plp = new ProductListingPage(page);
+    await use(plp);
+  },
+
+  /**
+   * ProductDetailPage fixture.
+   */
+  productDetailPage: async ({ page }, use) => {
+    const pdp = new ProductDetailPage(page);
+    await use(pdp);
+  },
+
+  /**
+   * BasketPage fixture.
+   */
+  basketPage: async ({ page }, use) => {
+    const basket = new BasketPage(page);
+    await use(basket);
+  },
+
+  /**
+   * CheckoutPage fixture.
+   */
+  checkoutPage: async ({ page }, use) => {
+    const checkout = new CheckoutPage(page);
+    await use(checkout);
+  },
+
+  /**
+   * LoginPage fixture.
+   */
+  loginPage: async ({ page }, use) => {
+    const login = new LoginPage(page);
+    await use(login);
+  },
+
+  /**
+  /**
+   * Setup fixture: Navigates to a product, selects a size,
+   * and adds it to the basket. Returns the page and product details.
+   */
+  // pageWithProductInCart: async ({ page }, use) => {
+  //   const homePage = new HomePage(page);
+  //   const pdp = new ProductDetailPage(page);
+  //   const plp = new ProductListingPage(page);
+
+  //   await homePage.open();
+  //   await homePage.searchAndSubmit('dress');
+  //   await plp.clickFirstProduct();
+
+  //   const productDetails = {
+  //     price: await pdp.getCurrentPrice(),
+  //     name: await pdp.getTextContent(pdp.productName)
+  //   };
+
+  //   await pdp.selectFirstAvailableSize();
+  //   await page.screenshot({ path: 'debug-pdp-before-add.png' });
+  //   await pdp.addToBasket();
+
+  //   await page.waitForTimeout(2000);
+
+  //   // We can cast the page to add productDetails, or we can just change the fixture type
+  //   // Since pageWithProductInCart is typed as Page, we might break types. 
+  //   // Wait, let's just cast it or use a separate fixture.
+  //   (page as any).productDetails = productDetails;
+
+  //   await use(page);
+
+  //   const basket = new BasketPage(page);
+  //   try {
+  //     await basket.open();
+  //     await basket.clearCart();
+  //   } catch {
+  //     // Best-effort cleanup
+  //   }
+  // },
+
+  /**
+   * Setup fixture: Adds configurable products to the cart based on `productsToAdd` option.
+   */
+  pageWithProductsInCart: async ({ page, productsToAdd }, use) => {
+    const homePage = new HomePage(page);
+    const pdp = new ProductDetailPage(page);
+    const plp = new ProductListingPage(page);
+
+    for (const item of productsToAdd) {
+      await homePage.open();
+      await homePage.searchAndSubmit(item);
+      await plp.clickFirstProduct();
+      await pdp.selectFirstAvailableSize();
+      await pdp.addToBasket();
+
+      // Close mini-basket sidebar that might block subsequent actions
+      await page.keyboard.press('Escape');
+      await page.waitForTimeout(1000);
+    }
+
+    await use(page);
+
+    const basket = new BasketPage(page);
+    try {
+      await basket.open();
+      await basket.clearCart();
+    } catch {
+      // Best-effort cleanup
+    }
+  },
+});
+
+// Re-export expect for convenience
+export { expect };
