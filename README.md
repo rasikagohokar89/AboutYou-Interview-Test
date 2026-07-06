@@ -39,22 +39,24 @@ Optional:
 ```bash
 # 1. Clone the repository
 git clone <repository-url>
-cd aboutyou-checkout-qa
 
-# 2. Install dependencies
+# 2. Traverse to the directory 
+cd .\AboutYou-Interview-Test\
+
+# 3. Install dependencies
 npm install
 
-# 3. Install Playwright browsers (Chromium, Firefox)
+# 4. Install Playwright browsers (Chromium, Firefox)
 npm run setup
 
-# 4. Configure environment (required for authenticated checkout tests)
+# 5. Configure environment (required for authenticated checkout tests)
 cp .env.example .env
 # Edit .env with your test account credentials
 
-# 5. Run all tests on Chromium
+# 6. Run all tests on Chromium
 npx playwright test --project=chromium
 
-# 6. View the HTML report
+# 7. View the HTML report
 npm run report
 ```
 ### First Run Checklist
