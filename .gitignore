@@ -10,9 +10,6 @@ playwright-report/
 blob-report/
 playwright/.cache/
 
-# Auth state (contains credentials)
-.auth/
-
 # Environment (contains secrets)
 .env
 
