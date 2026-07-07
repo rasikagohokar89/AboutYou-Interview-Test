@@ -20,9 +20,9 @@ During the checkout delivery step, the radio button to select a collection point
 1. Add any product to the basket and proceed to the basket page.
 2. Click **Proceed to checkout**.
 3. Fill in the shipping address details and proceed to checkout 
-4. Do the above 3 steps 4-5 times or sometime might need to do more 
-5. Toggle or select the option to deliver to a **Collection Point** (Paketshop / Pick up).
-6. Intermittently, noticed that the **Collection Point** section or radio button is not visible
+4. Repeat the above checkout loop (Steps 1–3) sequentially 4 to 5 times (or more).
+5. Observe that on the first few executions, the **Collection Point** selection radio button is visible and behaves normally.
+6. On subsequent repeated runs, the **Collection Point** section or radio button is no longer visible on the UI.
 
 ### Expected Behavior
 The **Collection Point** section or radio button is always visible and user should be able to select a collection point and continue to the next step.
