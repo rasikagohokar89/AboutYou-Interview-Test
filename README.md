@@ -2,6 +2,7 @@
 
 > **Playwright + TypeScript** E2E test suite for the About You e-commerce platform.  
 > Covers the complete user journey: browsing, search, product detail, basket, checkout, payment.
+
 > **The logins used for the test automation will persist till 12-07-2026, after this date please contact me. I will push the new user states!**
 
 ---
