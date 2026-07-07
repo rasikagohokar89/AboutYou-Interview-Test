@@ -53,8 +53,8 @@ npm run setup
 cp .env.example .env
 # Edit .env with your test account credentials
 
-# 6. Run all tests on Chromium (with 2 workers)
-npx playwright test --project=chromium --workers=2
+# 6. Run all tests on Chromium (with 3 workers)
+npx playwright test --project=chromium --workers=3
 
 # 7. View the HTML report
 npm run report
@@ -166,8 +166,8 @@ npx playwright test -g "Verify complete checkout process" --project=chromium
 # Run with visible browser
 npx playwright test --project=chromium --headed
 
-# Run with 4 parallel workers
-npx playwright test --project=chromium --workers=4
+# Run with 3 parallel workers
+npx playwright test --project=chromium --workers=3
 
 # Run with retries
 npx playwright test --project=chromium --retries=2
@@ -315,7 +315,7 @@ In GitLab CI, reports are automatically saved as artifacts:
 | `HEADLESS` | Run browsers in headless mode | `true` | No |
 | `SLOW_MO` | Slow down actions by N ms | `0` | No |
 | `RETRIES` | Number of retries on failure | `1` | No |
-| `WORKERS` | Parallel worker count | `2` | No |
+| `WORKERS` | Parallel worker count | `3` | No |
 | `ENV` | Environment tag (staging/prod) | `staging` | No |
 
 ### Playwright Config (playwright.config.ts)
@@ -323,7 +323,7 @@ In GitLab CI, reports are automatically saved as artifacts:
 | Setting | Local | CI |
 |---------|-------|-----|
 | `retries` | From `RETRIES` env (default: 1) | 2 |
-| `workers` | From `WORKERS` env (default: 2) | 1 (sequential for stability) |
+| `workers` | From `WORKERS` env (default: 3) | 1 (sequential for stability) |
 | `fullyParallel` | `false` | `false` |
 | `reporter` | `html` + `list` | `html` + `list` + `junit` |
 | `screenshot` | `only-on-failure` | `only-on-failure` |
@@ -363,7 +363,7 @@ git init
 git add .
 
 # Commit
-git commit -m "feat: initial test suite with 75 test cases"
+git commit -m "feat: initial test suite with 73 test cases"
 
 # Add remote
 git remote add origin <your-gitlab-repo-url>
@@ -527,7 +527,7 @@ Clean imports (`import { TestData } from '@helpers/test-data'`) instead of fragi
 
 ### 9. Centralized Test Data
 
-All test data (addresses, search queries, voucher codes) lives in `src/helpers/test-data.ts`. When the site changes validation rules, updates happen in a single file instead of across 75 tests.
+All test data (addresses, search queries, voucher codes) lives in `src/helpers/test-data.ts`. When the site changes validation rules, updates happen in a single file instead of across 73 tests.
 
 ### 10. Tag-Based Test Organization
 

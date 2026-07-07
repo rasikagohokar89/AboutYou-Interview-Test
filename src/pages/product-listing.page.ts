@@ -143,7 +143,8 @@ export class ProductListingPage extends BasePage {
    */
   async applyFilter(categoryName: string, value: string): Promise<void> {
     // Click the filter category header to expand it
-    const categoryHeader = this.page.getByRole('button', { name: new RegExp(categoryName, 'i') }).first();
+    const categoryHeader = this.page.getByTestId('opener').filter({ hasText: new RegExp(categoryName, 'i') });
+    //this.page.getByRole('button', { name: new RegExp(categoryName, 'i') }).first();
     if (await this.isElementVisible(categoryHeader, 3000)) {
       await this.safeClick(categoryHeader);
       await this.page.waitForTimeout(500);

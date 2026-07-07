@@ -74,7 +74,7 @@ export class ProductDetailPage extends BasePage {
     this.productImages = page.getByRole('img');
 
     // Size selection
-    this.sizeSelector = page.getByRole('button').filter({ hasText: /Select size|Größe wählen/i }).first();
+    this.sizeSelector = page.getByTestId('sizeFlyoutOpener').first();
     this.sizeOptions = page.getByRole('button').filter({ hasText: /^[A-Z0-9x ]+$/ }); // Generic fallback for size buttons
     this.selectSizePrompt = page.getByText(/Please select a size|Bitte wähle eine Größe/i).first();
 
@@ -172,6 +172,7 @@ export class ProductDetailPage extends BasePage {
     const count = await this.sizeOptions.count();
     for (let i = 0; i < count; i++) {
       const option = this.sizeOptions.nth(i);
+      // Notify me bell icon for some sizes
       const isDisabled = await option.isDisabled().catch(() => false);
       const hasStrikethrough = await option.locator('s, del, [class*="crossed"]').count() > 0;
 

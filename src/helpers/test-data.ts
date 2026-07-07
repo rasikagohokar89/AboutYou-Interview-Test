@@ -185,13 +185,11 @@ export class TestData {
 
   /** Common product search terms guaranteed to return results */
   static readonly GENERAL_SEARCH_QUERIES = [
-    'dress',
-    't-shirt',
-    'jeans',
-    'hoodie',
-    'jacket',
-    'sneakers',
-    'shirt'
+    'bag',
+    'cap',
+    'Accessories',
+    'scarf',
+    'necklace'
   ] as const;
 
   static readonly SEARCH_QUERIES = {

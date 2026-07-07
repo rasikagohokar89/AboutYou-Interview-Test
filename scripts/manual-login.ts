@@ -1,10 +1,16 @@
 import { chromium } from '@playwright/test';
 import * as path from 'path';
 
-// Parse command line argument to specify account: 1 or 2
+// Parse command line argument to specify account: 1, 2, or 3
 const args = process.argv.slice(2);
 const accountNum = args[0] || '1';
-const authFileName = accountNum === '2' ? 'user-1.json' : 'user.json';
+
+let authFileName = 'user.json';
+if (accountNum === '2') {
+  authFileName = 'user-1.json';
+} else if (accountNum === '3') {
+  authFileName = 'user-2.json';
+}
 const storageStatePath = path.resolve(__dirname, `../.auth/${authFileName}`);
 const loginUrl = 'https://en.aboutyou.de/';
 

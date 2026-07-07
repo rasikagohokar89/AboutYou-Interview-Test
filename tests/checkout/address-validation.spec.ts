@@ -23,16 +23,19 @@ test.describe('Address Validation @checkout @validation', () => {
 
     for (const { type, data } of testAddresses) {
       test(`Provide ${type} and verify that checkout continues @regression`, async ({ pageWithProductsInCart, basketPage, checkoutPage }) => {
+        await basketPage.open()
+
         // 2. Proceed to checkout
         await basketPage.proceedToCheckout();
 
         // 3. Fill address and continue
         await checkoutPage.fillShippingAddress(data);
-        await checkoutPage.clickContinue();
 
         // 4. Validate that there are no errors and we reached the Payment tab
         const hasErrors = await checkoutPage.hasValidationErrors();
         expect(hasErrors).toBe(false);
+
+        await checkoutPage.clickContinue();
 
         await expect(checkoutPage.paymentOptions).toBeVisible();
       });

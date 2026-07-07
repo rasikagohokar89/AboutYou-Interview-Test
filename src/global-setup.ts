@@ -70,12 +70,16 @@ async function verifyAuthState(storageStatePath: string, accountName: string) {
 setup('verify authentication state', async () => {
   const file1 = TestConfig.storageStatePath;
   const file2 = path.join(path.dirname(file1), 'user-1.json');
+  const file3 = path.join(path.dirname(file1), 'user-2.json');
 
   console.log('--- Verifying Auth State 1 ---');
   await verifyAuthState(file1, 'Account 1');
 
   console.log('--- Verifying Auth State 2 ---');
   await verifyAuthState(file2, 'Account 2');
+
+  console.log('--- Verifying Auth State 3 ---');
+  await verifyAuthState(file3, 'Account 3');
 });
 
 

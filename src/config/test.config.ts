@@ -43,7 +43,7 @@ export const TestConfig = {
   /** Test execution settings */
   execution: {
     retries: parseInt(process.env.RETRIES || '1', 10),
-    workers: parseInt(process.env.WORKERS || '2', 10),
+    workers: parseInt(process.env.WORKERS || '3', 10),
   },
 
   /** Environment identifier (staging, production, etc.) */

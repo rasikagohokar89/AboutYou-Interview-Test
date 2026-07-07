@@ -172,7 +172,15 @@ export const test = base.extend<TestFixtures>({
    */
   storageState: async ({ }, use, testInfo) => {
     const workerIndex = testInfo.workerIndex;
-    const authFileName = (workerIndex % 2 === 0) ? 'user.json' : 'user-1.json';
+    // Allow forcing user.json via environment variable (e.g. SINGLE_USER=true or AUTH_USER=1)
+    const useSingleUser = process.env.SINGLE_USER === 'true' || process.env.AUTH_USER === '1';
+
+    // Map workers modulo 3: Worker 0 -> user.json, Worker 1 -> user-1.json, Worker 2 -> user-2.json
+    const accountIndex = workerIndex % 3;
+    const authFileName = useSingleUser
+      ? 'user.json'
+      : (accountIndex === 0 ? 'user.json' : `user-${accountIndex}.json`);
+
     const authFile = path.resolve(__dirname, `../../.auth/${authFileName}`);
 
     if (fs.existsSync(authFile)) {

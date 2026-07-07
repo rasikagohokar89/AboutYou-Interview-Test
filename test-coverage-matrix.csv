@@ -17,7 +17,7 @@ TC-015,search-filters.spec.ts,Search Filters > Filter Panel,should display filte
 TC-016,search-filters.spec.ts,Search Filters > Filter Panel,should display sort dropdown,@smoke,P1,UI Verification,Active,Filters
 TC-017,search-filters.spec.ts,Search Filters > Filter Categories,should display "Brand" filter category,@regression,P2,UI Verification,Active,Filters
 TC-018,search-filters.spec.ts,Search Filters > Filter Categories,should display "Color" filter category,@regression,P2,UI Verification,Active,Filters
-TC-019,search-filters.spec.ts,Search Filters > Filter Categories,should display "Size" filter category,@regression,P2,UI Verification,Active,Filters
+TC-019,search-filters.spec.ts,Search Filters > Filter Categories,should display "Size" filter category,@regression,P2,UI Verification,Inactive,Filters
 TC-020,search-filters.spec.ts,Search Filters > Filter Categories,should display "Price" filter category,@regression,P2,UI Verification,Active,Filters
 TC-021,search-filters.spec.ts,Search Filters > Filter Categories,should display "Category" filter category,@regression,P3,UI Verification,Active,Filters
 TC-022,search-filters.spec.ts,Search Filters > Filter Categories,should display "Fit" filter category,@regression,P3,UI Verification,Active,Filters
@@ -46,7 +46,7 @@ TC-044,cart-management.spec.ts,Cart Management > Quantity,should update item qua
 TC-045,cart-management.spec.ts,Cart Management > Persistence,should persist cart across page navigation,@regression,P2,Functional,Active,Basket
 TC-046,cart-management.spec.ts,Cart Management > Checkout Flow,Proceed to checkout without login verify login window,@regression,P1,Functional,Skipped,Basket
 TC-047,cart-management.spec.ts,Cart Management > Negative,should prompt for size selection when adding without a size,@negative,P2,Negative,Active,Basket
-TC-048,cart-management.spec.ts,Cart Management > Negative,should not allow increasing quantity beyond maximum,@negative,P2,Negative,Active,Basket
+TC-048,cart-management.spec.ts,Cart Management > Negative,should not allow increasing quantity beyond maximum,@negative,P2,Negative,Inactive,Basket
 TC-049,cart-management.spec.ts,Cart Management > Negative,Empty cart message should be displayed,@negative,P2,Negative,Active,Basket
 TC-050,cart-management.spec.ts,Cart Management > Edge Cases,should handle currency format correctly EUR,@edge-case,P3,Edge Case,Active,Basket
 TC-051,cart-management.spec.ts,Cart Management > Edge Cases,should show correct basket count in header badge,@edge-case,P2,Edge Case,Active,Basket

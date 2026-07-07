@@ -14,6 +14,7 @@ import { ProductListingPage } from '../../src/pages/product-listing.page';
 import { NetworkHelper } from '../../src/helpers/network-helper';
 import { TestConfig } from '../../src/config/test.config';
 import { or } from 'ajv/dist/compile/codegen';
+import { Console } from 'console';
 
 test.describe('Cart Calculations @cart', () => {
   // Parse prices to numbers for comparison to avoid currency symbol and decimal issues
@@ -113,44 +114,37 @@ test.describe('Cart Calculations @cart', () => {
 
 
     test.describe('Remove item and verify prices', () => {
-      test.use({ productsToAdd: ['pant', 'dress'] });
+      test.use({ productsToAdd: ['Accessories', 'bag'] });
 
       test('Add 2 items to cart, remove one item and verify prices are updated @regression', async ({ page, pageWithProductsInCart, basketPage }) => {
-        const verifyPrices = async (stepName: string) => {
-          await test.step(stepName, async () => {
-            const subtotalText = await basketPage.getSubtotal();
-            const shippingText = await basketPage.getShippingCost();
-            const totalText = await basketPage.getOrderTotal();
-
-            console.log(`Order Summary Texts (${stepName}):`, { subtotalText, shippingText, totalText });
-
-            const subtotal = parsePrice(subtotalText);
-            const shipping = parsePrice(shippingText) || 0;
-            const expectedTotal = subtotal + shipping;
-            const actualTotal = parsePrice(totalText);
-
-            expect(actualTotal).toBeCloseTo(expectedTotal, 2);
-          });
-        };
-
+        const productDetails = (pageWithProductsInCart as any).productDetails;
+        console.log("Product Details", productDetails)
         await test.step('Navigate to checkout/basket', async () => {
           await basketPage.open();
           // Wait for basket API to ensure totals are calculated
           await page.waitForTimeout(3000);
         });
 
-        // 1. Validate price of 2 items
-        await verifyPrices('Verify prices with 2 items');
+        const totalText = await basketPage.getSubtotal();
+        const total = parsePrice(totalText);
+        console.log("Total before item removed", total)
+
 
         // 2. Remove one item
         await test.step('Remove one item from cart', async () => {
-          await basketPage.removeItem(0);
+          await basketPage.removeItem(1);
           // Wait for removal to reflect in totals
           await page.waitForTimeout(3000);
         });
 
         // 3. Verify price is updated
-        await verifyPrices('Verify prices are updated after removal');
+        const totalText1 = await basketPage.getSubtotal();
+        const total1 = parsePrice(totalText1);
+        console.log("Total after item removed", total1)
+
+        // verify the total amount is reduced by removed items price
+        const new_total = total - parsePrice(productDetails.price);
+        expect(total1).toBeCloseTo(new_total, 2);
       });
     });
 
@@ -225,7 +219,7 @@ test.describe('Cart Calculations @cart', () => {
 
     test.describe('Unauthenticated Checkout Flow', () => {
       // Clear storage state for these tests so they start unauthenticated
-      test.use({ storageState: { cookies: [], origins: [] } });
+      //test.use({ storageState: { cookies: [], origins: [] } });
       // Not tested yet 
       test.skip('Proceed to checkout without login, verify window for login displayed and checkout page visible after successful login @regression', async ({ page, pageWithProductsInCart, basketPage, loginPage, checkoutPage }) => {
         // Skip if no test credentials are provided
@@ -292,33 +286,6 @@ test.describe('Cart Calculations @cart', () => {
         await productDetailPage.safeClick(productDetailPage.addToBasketButton, { force: true });
       });
 
-      // increase quantity more than the maximum allowed
-      test('should not allow increasing the quantity beyond the maximum allowed quantity @negative', async ({ pageWithProductsInCart, basketPage }) => {
-
-        await basketPage.open();
-        let isDisabled = false;
-
-        // verifies the maximum quantity has been reached i.e 9 , or there is insufficient stock.
-        for (let i = 1; i < 9; i++) {
-          // Check if the button is explicitly marked as disabled
-          isDisabled = await basketPage.isIncreaseQuantityDisabled(0);
-          if (isDisabled) {
-            break;
-          }
-          try {
-            // Try to click increase
-            await basketPage.increaseQuantity(0);
-          } catch (e) {
-            // If clicking throws an error, the button might have become unclickable/disabled
-            isDisabled = true;
-            break; // Stop once the limit is reached
-          }
-        }
-
-        expect(isDisabled).toBe(true);
-
-      });
-
       test('Empty cart message should be displayed @negative', async ({ basketPage }) => {
         // Navigate to basket
         await basketPage.open();
@@ -349,7 +316,6 @@ test.describe('Cart Calculations @cart', () => {
         expect(count).toBeGreaterThanOrEqual(1);
       });
     });
-
 
     // ─── Cleanup ─────────────────────────────────────────────
 

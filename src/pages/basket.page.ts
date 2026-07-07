@@ -90,6 +90,8 @@ export class BasketPage extends BasePage {
   /** Payment methods displayed in the basket */
   readonly paymentMethods: Locator;
 
+  readonly coupon_amount: Locator;
+
   constructor(page: Page) {
     super(page);
 
@@ -114,12 +116,11 @@ export class BasketPage extends BasePage {
     this.removeItemButton = page.getByRole('button', { name: /remove|delete|löschen|entfernen/i });
 
     // Order summary
-    this.subtotal = page.locator('div, span, p').filter({ hasText: /^(?:Subtotal|Total|Zwischensumme)/i }).last();
-    this.shippingCost = page.locator('div, span, p').filter({ hasText: /^(?:Shipping|Versand)/i }).last();
+    this.subtotal = page.locator("//div[@data-testid='priceSummaryRow'][.//span[text()='Total']]//span[@data-testid='priceSummaryRowAmount']/span");
+    this.shippingCost = page.locator("//div[@data-testid='priceSummaryRow'][.//span[text()='Shipping & Service']]//span[@data-testid='priceSummaryRowAmount']/span");
     this.discountAmount = page.locator('div, span, p').filter({ hasText: /Discount|Rabatt/i }).last();
-    this.orderTotal = page.locator('div, li, p').filter({ hasText: /You pay|Du zahlst|Total/i }).last();
+    this.orderTotal = page.locator("//div[@data-testid='basketTotalPriceRow'][.//span[contains(text(),'You pay')]]//span[@data-testid='basketTotalPrice']/span");
     this.freeShippingMessage = page.getByText(/free shipping/i).first();
-
 
     // Voucher/promo code
     this.voucherInput = page.getByRole('textbox').filter({ hasText: /voucher|promo/i }).first();
@@ -130,7 +131,7 @@ export class BasketPage extends BasePage {
     this.removeVoucherButton = page.getByRole('button', { name: /remove voucher/i }).first();
 
     // CTAs
-    this.checkoutButton = page.getByRole('button', { name: /checkout|Kasse|objednávce/i }).or(page.getByRole('link', { name: /checkout|Kasse|objednávce/i })).first();
+    this.checkoutButton = page.getByRole('button', { name: /checkout|Kasse|objednávce/i }).or(page.getByRole('link', { name: /checkout|Kasse|objednávce/i })).or(page.getByText(/Proceed to checkout/i)).first();
     this.continueShoppingLink = page.getByRole('link', { name: /Continue shopping|Weiter einkaufen|Pokračovat/i }).first();
 
     // Empty state
@@ -139,7 +140,10 @@ export class BasketPage extends BasePage {
 
     // Payment methods
     this.paymentMethods = page.locator('img[alt*="Klarna"], img[alt*="PayPal"], img[alt*="VISA"], img[alt*="MasterCard"], img[alt*="Apple Pay"], img[alt*="Google Pay"]');
+
+    this.coupon_amount = page.locator("//div[@data-testid='priceSummaryRow'][.//span[text()='Coupon Savings']]//span[@data-testid='priceSummaryRowAmount']/span");
   }
+
 
   // ─── Actions ─────────────────────────────────────────────────
 
