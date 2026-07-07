@@ -17,6 +17,7 @@ test.describe('Voucher / Promo Code @cart @voucher', () => {
 
   test.describe('Voucher Input Presence', () => {
 
+    //test.use({ productsToAdd: ['pant', 'dress'] });
     test('Provide valid voucher code and verify it is applied @positive @regression', async ({ page, pageWithProductsInCart, basketPage, checkoutPage }) => {
 
       //open basket page
@@ -37,11 +38,10 @@ test.describe('Voucher / Promo Code @cart @voucher', () => {
       }
       await checkoutPage.addVoucherCode(TestData.VOUCHER_CODES.valid);
 
-      // verify API with /api/co/v3/state/voucher was triggered and its status was 201
-      const response = await page.waitForResponse(response => response.url().includes('/api/co/v3/state/voucher') && response.status() === 201);
-      expect(response).toBeTruthy();
+      // verify notification is received after the voucher is applied
+      await expect(page.getByText(TestData.VALID_VOUCHER_SUCCESS_MSG)).toBeVisible()
 
-      // verify price updated after the voucher is applied 
+      // verify price updated after the voucher is applied
       const finalTotal = parseFloat((await checkoutPage.reviewTotal.innerText()).replace('€', '').trim());
       expect(finalTotal).not.toEqual(initialTotal)
     });
@@ -66,17 +66,22 @@ test.describe('Voucher / Promo Code @cart @voucher', () => {
         await checkoutPage.fillShippingAddress(TestData.VALID_DE_ADDRESS);
         await checkoutPage.clickContinue();
       }
+
+      // Get order total before voucher is applied 
+      const initialTotal = parseFloat((await checkoutPage.reviewTotal.innerText()).replace('€', '').trim());
+
       await checkoutPage.addVoucherCode(TestData.VOUCHER_CODES.invalid);
 
-      // verify API with /api/co/v3/state/voucher was triggered and its status was 404 as invalid voucher code is provided
-      const response = await page.waitForResponse(response => response.url().includes('/api/co/v3/state/voucher') && response.status() === 404);
-      expect(response).toBeTruthy();
 
       //verify error message is visible
       await expect(checkoutPage.checkoutError).toBeVisible();
       const error_message = await checkoutPage.checkoutError.innerText();
       console.log("error message ", error_message);
       expect(error_message).toContain('Unfortunately, this voucher code does not exist.');
+
+      // verify price is not updated as voucher not applied
+      const finalTotal = parseFloat((await checkoutPage.reviewTotal.innerText()).replace('€', '').trim());
+      expect(finalTotal).toEqual(initialTotal)
     });
   });
   // ─── Cleanup ────────────────────────────────────────────────

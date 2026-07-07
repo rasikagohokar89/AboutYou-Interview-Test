@@ -46,7 +46,7 @@ export class ProductListingPage extends BasePage {
     this.sortDropdown = page.getByRole('button', { name: /Sort|Sortieren/i }).first();
     this.sortOptions = page.getByRole('option').or(page.getByRole('menuitem')).or(page.getByRole('radio'));
     this.activeFilterChips = page.getByRole('button').filter({ hasText: /×|✕|remove/i });
-    this.clearAllFiltersButton = page.getByTestId('[data-testid="resetAllFiltersButton"]')
+    this.clearAllFiltersButton = page.getByTestId('[data-testid="resetButton"]')
     this.productCountText = page.getByText(/products|Produkte|results|Ergebnisse/i).first();
   }
 

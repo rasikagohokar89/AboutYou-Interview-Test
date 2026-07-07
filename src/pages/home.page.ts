@@ -38,6 +38,10 @@ export class HomePage extends BasePage {
   /** Wishlist icon in header */
   readonly wishlistIcon: Locator;
 
+  readonly change_to_english: Locator;
+
+  readonly change_to_de: Locator;
+  readonly language_change: Locator
   constructor(page: Page) {
     super(page);
 
@@ -57,6 +61,11 @@ export class HomePage extends BasePage {
     this.basketIcon = page.getByRole('button', { name: /Basket/i }).first();
     this.basketBadge = this.basketIcon.locator('div, span').filter({ hasText: /^[0-9]+$/ }).first();
     this.wishlistIcon = page.getByTestId('Wishlist');
+
+    //Language change
+    this.change_to_english = page.getByTestId('languageCountrySwitchLanguage-Englisch')
+    this.change_to_de = page.getByTestId('languageCountrySwitchLanguage-German')
+    this.language_change = page.getByTestId('languageCountrySwitch')
   }
 
   // ─── Actions ─────────────────────────────────────────────────
@@ -75,18 +84,38 @@ export class HomePage extends BasePage {
    * 
    * @param query - The search term to enter
    */
-  async searchFor(query: string): Promise<void> {
-    // Some About You layouts require clicking the search icon first to expand the search bar
-    if (!(await this.searchInput.isVisible().catch(() => false))) {
-      // Look for the generic search icon button in the header
-      const searchToggle = this.page.getByTestId('search-button').or(this.page.locator('button[data-testid*="search"]')).first();
-      await searchToggle.click({ force: true }).catch(() => { });
-    }
+  // async searchFor(query: string): Promise<void> {
+  //   // Some About You layouts require clicking the search icon first to expand the search bar
+  //   if (!(await this.searchInput.isVisible().catch(() => false))) {
+  //     // Look for the generic search icon button in the header
+  //     const searchToggle = this.page.getByTestId('search-button').or(this.page.locator('button[data-testid*="search"]')).first();
+  //     await searchToggle.click({ force: true }).catch(() => { });
+  //   }
 
-    await this.safeClick(this.searchInput);
-    await this.safeFill(this.searchInput, query);
-    // Wait briefly for autocomplete to appear
-    await this.page.waitForTimeout(1000);
+  //   await this.safeClick(this.searchInput);
+  //   await this.safeFill(this.searchInput, query);
+  //   // Wait briefly for autocomplete to appear
+  //   await this.page.waitForTimeout(1000);
+  // }
+  async searchFor(query: string): Promise<void> {
+    const maxRetries = 3;
+
+    for (let attempt = 1; attempt <= maxRetries; attempt++) {
+      try {
+        await this.dismissPopups();
+        await this.page.waitForSelector('.s1vj811m.sfjfx4y.s1823pp1.sbn1l2g');
+        await this.page.locator('.s1vj811m.sfjfx4y.s1823pp1.sbn1l2g').click();
+        await this.page.getByTestId('searchBarInput').fill(query);
+        await this.page.waitForTimeout(1000);
+        return;
+      } catch (error) {
+        console.log(`Search attempt ${attempt}/${maxRetries} failed: ${(error as Error).message}`);
+        if (attempt === maxRetries) {
+          throw new Error(`Search failed after ${maxRetries} retries for query: "${query}"`);
+        }
+        await this.page.waitForTimeout(1000);
+      }
+    }
   }
 
   /**
@@ -103,6 +132,7 @@ export class HomePage extends BasePage {
    * @param query - The search term
    */
   async searchAndSubmit(query: string): Promise<void> {
+    await this.page.waitForLoadState('domcontentloaded').catch(() => { });
     await this.searchFor(query);
     await this.submitSearch();
   }
@@ -172,14 +202,15 @@ export class HomePage extends BasePage {
    */
   async changeLanguage(locale: string): Promise<void> {
     // AboutYou uses subdomain-based locale: en.aboutyou.de vs www.aboutyou.de
-    const currentUrl = this.page.url();
+    //const currentUrl = this.page.url();
     let newUrl: string;
+    this.language_change.click()
     if (locale === 'de') {
-      newUrl = currentUrl.replace('en.aboutyou.de', 'www.aboutyou.de');
+      await this.change_to_de.click()
     } else {
-      newUrl = currentUrl.replace('www.aboutyou.de', 'en.aboutyou.de');
+      await this.change_to_english.click()
     }
-    await this.page.goto(newUrl, { waitUntil: 'domcontentloaded' });
+    await this.page.waitForLoadState('domcontentloaded')
     await this.dismissCookieConsent();
   }
 

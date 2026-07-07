@@ -217,6 +217,9 @@ export class TestData {
     longCode: 'A'.repeat(50),
   } as const;
 
+  /** Success message for valid voucher code */
+  static readonly VALID_VOUCHER_SUCCESS_MSG = 'Online_Coop DE UniDays BK10 MOV75 1125 was successfully added. The voucher cannot be applied in combination with DEAL discounts, coupons or Coins';
+
   // ─── Utility Methods ────────────────────────────────────────
 
   /**
@@ -254,4 +257,42 @@ export class TestData {
       this.WHITESPACE_ADDRESS,
     ];
   }
+
+  // ─── API and Checkout Constants ─────────────────────────────
+  static readonly API_ENDPOINTS = {
+    SHIPPING_ADDRESS: '/next/api/co/v3/state/order/addresses/shipping',
+    STATE: '/next/api/co/v3/state',
+    CONFIRMATION: '/next/api/co/v3/state/order/confirmation/execute',
+  } as const;
+
+  static readonly HTTP_METHODS = {
+    PUT: 'PUT',
+    POST: 'POST',
+  } as const;
+
+  static readonly STATUS_CODES = {
+    OK: 200,
+    CREATED: 201,
+    PAYMENT_REQUIRED: 402,
+  } as const;
+
+  static readonly ORDER_STATUS = {
+    CONFIRMED: 'confirmed',
+  } as const;
+
+  static readonly ERROR_CODES = {
+    INVALID_PHONE_NUMBER: 'INVALID_PHONE_NUMBER',
+  } as const;
+
+  static readonly URL_SUBSTRINGS = {
+    CONFIRMATION: 'confirmation',
+    THANK_YOU: 'thank-you',
+  } as const;
+
+  static readonly TIMEOUTS = {
+    ELEMENT_VISIBLE: 5000,
+    MOCK_DELAY: 3000,
+  } as const;
+
+  static readonly DEFAULT_INDEX = 0;
 }

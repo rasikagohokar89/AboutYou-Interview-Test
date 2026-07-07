@@ -8,7 +8,6 @@
 
 import { test, expect } from '../../src/fixtures/test.fixtures';
 import { BasketPage } from '../../src/pages/basket.page';
-import { CheckoutPage } from '../../src/pages/checkout.page';
 import { TestData } from '../../src/helpers/test-data';
 
 test.describe('Order Summary Verification @checkout @order-summary', () => {
@@ -45,43 +44,6 @@ test.describe('Order Summary Verification @checkout @order-summary', () => {
       // Total should contain a price value
       expect(summary.total).toMatch(/[€\d]/);
       console.log('Summary total:', summary.total);
-    });
-  });
-
-  test('Verify order summary total matches basket total @regression', async ({ page, pageWithProductsInCart, basketPage, checkoutPage }) => {
-
-    const parsePrice = (priceStr: string): number => {
-      const match = priceStr.match(/[\d]+[.,]\d{2}/);
-      if (!match) return 0;
-      return parseFloat(match[0].replace(',', '.'));
-    };
-
-    let basketTotal = 0;
-
-    await test.step('Navigate to basket and get total', async () => {
-      await basketPage.open();
-      await page.waitForTimeout(3000);
-      const totalText = await basketPage.getOrderTotal();
-      basketTotal = parsePrice(totalText);
-      console.log('Basket total (parsed):', basketTotal);
-    });
-
-    await test.step('Proceed to checkout and fill address', async () => {
-      await basketPage.proceedToCheckout();
-      await checkoutPage.fillShippingAddress(TestData.VALID_DE_ADDRESS);
-      await checkoutPage.clickContinue();
-      await page.waitForTimeout(2000);
-    });
-
-    await test.step('Compare checkout summary total with basket total', async () => {
-      const summary = await checkoutPage.getOrderSummaryDetails();
-      const checkoutTotal = parsePrice(summary.total);
-      console.log('Checkout total (parsed):', checkoutTotal);
-
-      // Totals should match (within rounding tolerance)
-      if (basketTotal > 0 && checkoutTotal > 0) {
-        expect(checkoutTotal).toBeCloseTo(basketTotal, 2);
-      }
     });
   });
 

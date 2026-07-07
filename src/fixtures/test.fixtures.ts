@@ -21,6 +21,8 @@ import { CheckoutPage } from '../pages/checkout.page';
 import { LoginPage } from '../pages/login.page';
 import { TestConfig } from '../config/test.config';
 import { TestData } from '@helpers/test-data';
+import * as fs from 'fs';
+import * as path from 'path';
 
 export type TestOptions = {
   /** Array of search queries for products to add to the cart */
@@ -161,6 +163,24 @@ export const test = base.extend<TestFixtures>({
       await basket.clearCart();
     } catch {
       // Best-effort cleanup
+    }
+  },
+
+  /**
+   * Dynamically assign storageState based on worker index for parallel test execution.
+   * Even workers use user.json, odd workers use user-1.json.
+   */
+  storageState: async ({ }, use, testInfo) => {
+    const workerIndex = testInfo.workerIndex;
+    const authFileName = (workerIndex % 2 === 0) ? 'user.json' : 'user-1.json';
+    const authFile = path.resolve(__dirname, `../../.auth/${authFileName}`);
+
+    if (fs.existsSync(authFile)) {
+      console.log(`[Worker ${workerIndex}] Using auth state: ${authFileName}`);
+      await use(authFile);
+    } else {
+      console.log(`[Worker ${workerIndex}] Auth state ${authFileName} not found. Falling back to user.json`);
+      await use(path.resolve(__dirname, '../../.auth/user.json'));
     }
   },
 });

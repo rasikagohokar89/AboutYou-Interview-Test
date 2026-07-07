@@ -1,7 +1,11 @@
 import { chromium } from '@playwright/test';
 import * as path from 'path';
 
-const storageStatePath = path.resolve(__dirname, '../.auth/user.json');
+// Parse command line argument to specify account: 1 or 2
+const args = process.argv.slice(2);
+const accountNum = args[0] || '1';
+const authFileName = accountNum === '2' ? 'user-1.json' : 'user.json';
+const storageStatePath = path.resolve(__dirname, `../.auth/${authFileName}`);
 const loginUrl = 'https://en.aboutyou.de/';
 
 async function manualLogin() {
@@ -22,10 +26,10 @@ async function manualLogin() {
   await page.goto(loginUrl);
 
   console.log('---------------------------------------------------------');
-  console.log('🤖 ANTI-BOT BYPASS SCRIPT');
+  console.log(`🤖 ANTI-BOT BYPASS SCRIPT FOR ACCOUNT ${accountNum}`);
   console.log('---------------------------------------------------------');
   console.log('1. A Google Chrome browser window has opened.');
-  console.log('2. Please click the Account/Login icon and log in manually.');
+  console.log(`2. Please click the Account/Login icon and log in manually to Account ${accountNum}.`);
   console.log('3. Complete the Cloudflare CAPTCHA if prompted.');
   console.log('4. Once you are successfully logged in (and see your account name/icon),');
   console.log('   return to this terminal and press ENTER.');

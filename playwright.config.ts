@@ -75,6 +75,7 @@ export default defineConfig({
      */
     {
       name: 'setup',
+      testDir: './src',
       testMatch: /global-setup\.ts/,
     },
 

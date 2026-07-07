@@ -38,7 +38,7 @@ Optional:
 
 ```bash
 # 1. Clone the repository
-git clone <repository-url>
+git clone https://github.com/rasikagohokar89/AboutYou-Interview-Test.git
 
 # 2. Traverse to the directory 
 cd .\AboutYou-Interview-Test\
@@ -53,8 +53,8 @@ npm run setup
 cp .env.example .env
 # Edit .env with your test account credentials
 
-# 6. Run all tests on Chromium
-npx playwright test --project=chromium
+# 6. Run all tests on Chromium (with 2 workers)
+npx playwright test --project=chromium --workers=2
 
 # 7. View the HTML report
 npm run report
@@ -119,7 +119,7 @@ aboutyou-checkout-qa/
 |   |-- checkout/                   # Checkout flow (requires auth)
 |   |   |-- checkout-flow.spec.ts   # E2E checkout with mocked payment
 |   |   |-- address-validation.spec.ts  # Valid/invalid addresses, collection points
-|   |   |-- order-summary.spec.ts   # Order summary details and total matching
+|   |   |-- order-summary.spec.ts   # Order summary details verification
 |   |   |-- voucher-promo.spec.ts   # Valid/invalid voucher codes
 |   |   |-- payment-handling.spec.ts    # Payment success, timeout, network error
 |   |   |-- checkout-edge-cases.spec.ts # Back button, refresh, navigate away
@@ -363,7 +363,7 @@ git init
 git add .
 
 # Commit
-git commit -m "feat: initial test suite with 77 test cases"
+git commit -m "feat: initial test suite with 75 test cases"
 
 # Add remote
 git remote add origin <your-gitlab-repo-url>
@@ -527,7 +527,7 @@ Clean imports (`import { TestData } from '@helpers/test-data'`) instead of fragi
 
 ### 9. Centralized Test Data
 
-All test data (addresses, search queries, voucher codes) lives in `src/helpers/test-data.ts`. When the site changes validation rules, updates happen in a single file instead of across 77 tests.
+All test data (addresses, search queries, voucher codes) lives in `src/helpers/test-data.ts`. When the site changes validation rules, updates happen in a single file instead of across 75 tests.
 
 ### 10. Tag-Based Test Organization
 

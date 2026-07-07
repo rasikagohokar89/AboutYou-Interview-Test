@@ -32,6 +32,13 @@ API testing catches issues at the data layer before they surface in the UI.
 ### Negative and Edge Cases
 Included scenarios real users encounter daily: browser back button, page refresh mid-checkout, navigate away and return, invalid voucher codes, and submitting without selecting a collection point.
 
+## Challenges & Test Flakiness
+
+During test suite development and run executions, a few factors were identified that could cause test flakiness:
+- **Search Bar Flakiness**: There were recent changes observed around the search bar area on the website, which intermittently causes element interaction issues and search failures.
+- **Anti-Bot / Human Verification**: The storefront features strict security human verification checks (such as Cloudflare Turnstile). While this is excellent for production security, it interferes with automated testing. This was frequently observed during the add-to-basket flow where challenges would appear intermittently.
+- **Login Gates**: CAPTCHAs and security checks on the login page made fully automated login flows flaky or impossible. To bypass this, I implemented a manual login script (`scripts/manual-login.ts`) where the user logs in once, and the session state is saved to `.auth/user.json` and `.auth/user-1.json`. I configured parallel workers to use separate session files so that tests can run in parallel without cart conflicts.
+
 ## What I Deliberately Left Out
 
 | Area | Why |
@@ -43,6 +50,7 @@ Included scenarios real users encounter daily: browser back button, page refresh
 | **Social login E2E** | Requires real OAuth credentials for Google/Facebook/Apple |
 
 ## What I Would Test With More Time and Resources
+- **More UI Validations**: Add deeper verification on the elements rendered on the checkout and cart pages. (We added `TODO` comments at several places in the test files to mark where these additional UI verifications should go).
 - **Performance Testing** — Site must handle high traffic. Test flash sale behaviour, page load times under load, concurrent checkouts. Use JMeter or k6.
 - **Load Testing** — Find the breaking point. Identify bottlenecks (DB, payment gateway, CDN), plan capacity for campaigns like Black Friday, verify graceful degradation.
 - **Security Testing** — Data privacy is critical. Test user data isolation, concurrent last-item purchases, OWASP ZAP scanning, session expiry and invalidation.

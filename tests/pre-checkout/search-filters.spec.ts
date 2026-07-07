@@ -11,7 +11,6 @@ import { HomePage } from '../../src/pages/home.page';
 import { ProductListingPage } from '../../src/pages/product-listing.page';
 import { TestData } from '../../src/helpers/test-data';
 
-test.describe.configure({ mode: "parallel" })
 test.describe('Search Filters & Sorting @search @filters @pre-checkout', () => {
 
   test.beforeEach(async ({ homePage }) => {
@@ -109,7 +108,6 @@ test.describe('Search Filters & Sorting @search @filters @pre-checkout', () => {
 
       await test.step('Verify results are displayed', async () => {
         const count = await plp.getProductCount();
-        console.log('Products after Color filter:', count);
         expect(count).toBeGreaterThan(0);
       });
     });
@@ -147,7 +145,6 @@ test.describe('Search Filters & Sorting @search @filters @pre-checkout', () => {
       await page.waitForTimeout(2000);
 
       const originalCount = await plp.getProductCount();
-      console.log('Original product count:', originalCount);
 
       await test.step('Apply a filter', async () => {
         await plp.openFilters();
@@ -155,6 +152,7 @@ test.describe('Search Filters & Sorting @search @filters @pre-checkout', () => {
         await page.waitForTimeout(3000);
 
         const filteredCount = await plp.getProductCount();
+        expect(filteredCount).toBeGreaterThan(0)
       });
 
       await test.step('Clear all filters', async () => {
@@ -163,7 +161,7 @@ test.describe('Search Filters & Sorting @search @filters @pre-checkout', () => {
 
         const restoredCount = await plp.getProductCount();
         // After clearing, count should be restored to original (or close to it)
-        expect(restoredCount).toBeGreaterThan(0);
+        expect(restoredCount).toBe(originalCount);
       });
     });
   });

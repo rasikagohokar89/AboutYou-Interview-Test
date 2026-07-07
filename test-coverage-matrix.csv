@@ -56,12 +56,12 @@ TC-054,address-validation.spec.ts,Address Validation > Invalid,should show error
 TC-055,address-validation.spec.ts,Address Validation > Edge Cases,Verify continue button disabled when no collection point selected,@edge-case,P2,Edge Case,Active,Checkout
 TC-056,checkout-flow.spec.ts,Checkout Flow,Verify complete checkout process with mocked payment,@smoke @regression,P1,E2E,Active,Checkout
 TC-057,checkout-flow.spec.ts,Checkout Flow,Verify checkout process with declined payment,@smoke @regression,P1,E2E,Active,Checkout
-TC-058,checkout-flow.spec.ts,Checkout Flow,Verify card payment error with invalid card details,@regression,P1,Negative,Active,Checkout
+TC-058,checkout-flow.spec.ts,Checkout Flow,Verify card payment error with invalid card details,@regression,P1,Negative,Inactive,Checkout
 TC-059,checkout-edge-cases.spec.ts,Checkout Edge Cases,should handle browser back button during checkout,@regression @edge-case,P2,Edge Case,Active,Checkout
 TC-060,checkout-edge-cases.spec.ts,Checkout Edge Cases,should handle page refresh during checkout,@regression @edge-case,P2,Edge Case,Active,Checkout
 TC-061,checkout-edge-cases.spec.ts,Checkout Edge Cases,should handle navigating away and returning,@regression @edge-case,P2,Edge Case,Active,Checkout
 TC-062,order-summary.spec.ts,Order Summary,Verify order summary displays correct product details,@regression,P1,UI Verification,Active,Checkout
-TC-063,order-summary.spec.ts,Order Summary,Verify order summary total matches basket total,@regression,P1,Functional,Active,Checkout
+TC-063,order-summary.spec.ts,Order Summary,Verify order summary total matches basket total,@regression,P1,Functional,Inactive,Checkout
 TC-064,voucher-promo.spec.ts,Voucher > Valid Codes,Provide valid voucher code and verify it is applied,@positive @regression,P1,Functional,Active,Checkout
 TC-065,voucher-promo.spec.ts,Voucher > Invalid Codes,Provide invalid voucher code and verify not applied,@negative @regression,P1,Negative,Active,Checkout
 TC-066,payment-handling.spec.ts,Payment > Success,should handle successful payment,@smoke @regression,P1,E2E,Active,Payment

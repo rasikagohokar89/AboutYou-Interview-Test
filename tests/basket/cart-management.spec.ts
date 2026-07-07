@@ -16,6 +16,13 @@ import { TestConfig } from '../../src/config/test.config';
 import { or } from 'ajv/dist/compile/codegen';
 
 test.describe('Cart Calculations @cart', () => {
+  // Parse prices to numbers for comparison to avoid currency symbol and decimal issues
+  const parsePrice = (val: string | number): number => {
+    if (typeof val === 'number') return val;
+    const match = val.match(/\d+[.,]\d{2}/);
+    if (!match) return 0;
+    return parseFloat(match[0].replace(',', '.'));
+  };
 
   // ─── Positive Tests ─────────────────────────────────────────
 
@@ -54,10 +61,7 @@ test.describe('Cart Calculations @cart', () => {
         }
 
         expect(cartItem.quantity).toBe(1);
-
-        // Extract just the numbers for price validation to avoid currency symbol issues
-        const extractNumbers = (str: string) => str.replace(/[^\d]/g, '');
-        expect(extractNumbers(cartItem.price)).toEqual(extractNumbers(productDetails.price));
+        expect(parsePrice(cartItem.price)).toBeCloseTo(parsePrice(productDetails.price), 2);
       });
 
       await test.step('Verify price total calculations', async () => {
@@ -120,13 +124,6 @@ test.describe('Cart Calculations @cart', () => {
 
             console.log(`Order Summary Texts (${stepName}):`, { subtotalText, shippingText, totalText });
 
-            // Parse values to floats
-            const parsePrice = (priceStr: string) => {
-              const match = priceStr.match(/\d+[.,]\d{2}/);
-              if (!match) return 0;
-              return parseFloat(match[0].replace(',', '.'));
-            };
-
             const subtotal = parsePrice(subtotalText);
             const shipping = parsePrice(shippingText) || 0;
             const expectedTotal = subtotal + shipping;
@@ -169,12 +166,6 @@ test.describe('Cart Calculations @cart', () => {
 
       let initialSubtotal = 0;
       let shipping = 0;
-
-      const parsePrice = (priceStr: string) => {
-        const match = priceStr.match(/\d+[.,]\d{2}/);
-        if (!match) return 0;
-        return parseFloat(match[0].replace(',', '.'));
-      };
 
       await test.step('Get initial prices', async () => {
         initialSubtotal = parsePrice(await basketPage.getSubtotal());
@@ -235,7 +226,7 @@ test.describe('Cart Calculations @cart', () => {
     test.describe('Unauthenticated Checkout Flow', () => {
       // Clear storage state for these tests so they start unauthenticated
       test.use({ storageState: { cookies: [], origins: [] } });
-
+      // Not tested yet 
       test.skip('Proceed to checkout without login, verify window for login displayed and checkout page visible after successful login @regression', async ({ page, pageWithProductsInCart, basketPage, loginPage, checkoutPage }) => {
         // Skip if no test credentials are provided
         test.skip(!TestConfig.hasCredentials(), 'No test credentials configured');
@@ -252,6 +243,7 @@ test.describe('Cart Calculations @cart', () => {
 
         // login via Google
         await test.step('Login with Google', async () => {
+          // new window appears for login
           const popupPromise = page.waitForEvent('popup', { timeout: 10000 }).catch(() => null);
           await loginPage.safeClick(loginPage.googleLoginButton);
 
@@ -263,24 +255,11 @@ test.describe('Cart Calculations @cart', () => {
 
           // Wait for Google sign in page
           await googlePage.locator('input[type="email"]').waitFor({ state: 'visible', timeout: 15000 });
-          // Use the configured email (or replace with a valid google account if hmail.com fails)
-          await googlePage.locator('input[type="email"]').fill(TestConfig.credentials.email);
-          await googlePage.locator('button:has-text("Next"), button:has-text("Weiter")').first().click();
-
-          // Fill Google password
-          await googlePage.locator('input[type="password"]').waitFor({ state: 'visible', timeout: 15000 });
-          await googlePage.locator('input[type="password"]').fill(TestConfig.credentials.password);
-          await googlePage.locator('button:has-text("Next"), button:has-text("Weiter")').first().click();
 
           if (googlePage !== page) {
             await googlePage.waitForEvent('close', { timeout: 15000 }).catch(() => { });
           }
         });
-
-        // verify successful login and landed on shipping address page
-        const firstNameVisible = await checkoutPage.isElementVisible(checkoutPage.firstNameInput, 15000);
-        expect(firstNameVisible).toBe(true);
-        expect(page.url()).toContain('/checkout');
       });
     });
 

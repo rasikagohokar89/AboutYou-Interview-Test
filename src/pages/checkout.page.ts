@@ -228,7 +228,7 @@ export class CheckoutPage extends BasePage {
     // Order review
     this.orderSummary = page.locator('div').filter({ hasText: /Order summary/i }).first();
     this.reviewItems = page.getByRole('listitem');
-    this.reviewTotal = page.getByTestId('basket-total').getByText(/€/).first();
+    this.reviewTotal = page.locator('[data-test-id="basket-total"]').first();
     this.termsCheckbox = page.getByRole('checkbox', { name: /Terms and conditions/i }).first();
 
     // Action buttons
@@ -299,11 +299,13 @@ export class CheckoutPage extends BasePage {
     await this.streetInput.pressSequentially(fullStreet, { delay: 100 });
 
     // Wait for the dropdown menu to populate, then select the first option
-    await this.page.waitForTimeout(1500);
-    await this.streetInput.press('ArrowDown');
-    await this.page.waitForTimeout(500);
-    await this.streetInput.press('Enter');
-    await this.page.waitForTimeout(1000); // Wait for form to auto-fill other fields
+    if (fullStreet != '') {
+      await this.page.waitForTimeout(1500);
+      await this.streetInput.press('ArrowDown');
+      await this.page.waitForTimeout(500);
+      await this.streetInput.press('Enter');
+      await this.page.waitForTimeout(1000); // Wait for form to auto-fill other fields
+    }
 
 
 
@@ -601,9 +603,9 @@ export class CheckoutPage extends BasePage {
     total: string;
   }> {
     const productName = await this.reviewItems.first().textContent({ timeout: 3000 }).then(t => t?.trim() || '').catch(() => '');
-    const subtotal = await this.page.getByTestId('basket-subtotal').textContent({ timeout: 3000 }).then(t => t?.trim() || '').catch(() => '');
-    const shipping = await this.page.getByTestId('basket-shipping-cost').textContent({ timeout: 3000 }).then(t => t?.trim() || '').catch(() => '');
-    const total = await this.page.getByTestId('basket-total').textContent({ timeout: 3000 }).then(t => t?.trim() || '').catch(() => '');
+    const subtotal = await this.page.locator('[data-test-id="basket-subtotal"]').textContent({ timeout: 3000 }).then(t => t?.trim() || '').catch(() => '');
+    const shipping = await this.page.locator('[data-test-id="basket-shipping-cost"]').textContent({ timeout: 3000 }).then(t => t?.trim() || '').catch(() => '');
+    const total = await this.page.locator('[data-test-id="basket-total"]').textContent({ timeout: 3000 }).then(t => t?.trim() || '').catch(() => '');
 
     return { productName, subtotal, shipping, total };
   }

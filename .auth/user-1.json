@@ -1,0 +1,498 @@
+{
+  "cookies": [
+    {
+      "name": "taboola_session_id",
+      "value": "v2_5a38ef11d4ac202426fc9ff1b931fbf9_1d00ceec-b2c4-4e3f-89aa-ce52a2646674-tuct11465052_1783417554_1783417554_CNawjgYQ_O4_GPn94N_zMyABKAEwODib4wlAiIoQSMWG2ANQouwQWABgAGjKhZvptsiP2W5wAYABAIgBAJABAA",
+      "domain": ".taboola.com",
+      "path": "/aboutyougmbh-sc/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "__cf_bm",
+      "value": "lmI06Xl6OKK3zzBNqZQ_vETKPGt4Q9Rm7P7HfXAvIMs-1783417545-1.0.1.1-uk1r7Jha9nUKiIkoR3Dna1gA0J4.KoZCg_1hTz7WjlMev8kfKaSD4P0k8_RvG7CVcFGtU5OgjtaSnpGLnnxN8zrPUTBOh10PEgno09gFhCU",
+      "domain": ".aboutyou.de",
+      "path": "/",
+      "expires": 1783419344.705441,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "__cf_bm",
+      "value": "TpdOqw5mJtvk4iDHVsBP55U3M0osITP9a8k1LAwGJM0-1783417546-1.0.1.1-.2xOmK5d4x3xp4RXH_0NAAOFiPkGSjt.eyI1mkcs_lkLpdnvFGOSas1y2nUPABFe2TorSvz1aEDDg3M.3CM2lvQnCRKR5k4eRagiHJ3Q9QM",
+      "domain": ".aboutyou.com",
+      "path": "/",
+      "expires": 1783419345.86764,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "_gcl_au",
+      "value": "1.1.1577845573.1783417552",
+      "domain": ".aboutyou.de",
+      "path": "/",
+      "expires": 1791193552,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "_ayt_user_properties",
+      "value": "%7B%22customer_type%22%3A%22guest%22%2C%22shop_app_id%22%3A%22688%22%2C%22test_group%22%3A11%7D",
+      "domain": ".aboutyou.de",
+      "path": "/",
+      "expires": 1783428352.296309,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Strict"
+    },
+    {
+      "name": "ayt_sid",
+      "value": "1783417552",
+      "domain": ".aboutyou.de",
+      "path": "/",
+      "expires": 1783419389.604401,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "ayt_traffic_source",
+      "value": "source=direct|medium=(none)|true_direct=true",
+      "domain": ".aboutyou.de",
+      "path": "/",
+      "expires": 1784022352.336364,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "ayt_aytsts",
+      "value": "c291cmNlPWRpcmVjdHxtZWRpdW09KG5vbmUpfHRydWVfZGlyZWN0PXRydWU=",
+      "domain": ".aboutyou.de",
+      "path": "/",
+      "expires": 1784022352.336745,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "ay_cookie_consent_given",
+      "value": "1",
+      "domain": ".aboutyou.de",
+      "path": "/",
+      "expires": 1786009552,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "ay_optimizely_consent_given",
+      "value": "1",
+      "domain": ".aboutyou.de",
+      "path": "/",
+      "expires": 1786009552,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "x-ayt-cf-bot-score",
+      "value": "98",
+      "domain": ".aboutyou.de",
+      "path": "/",
+      "expires": 1783425152.495351,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "cf_header_info",
+      "value": "%7B%22x-ayt-cf-asn%22%3A%22undefined%22%2C%20%22x-ayt-cf-ja4%22%3A%22t13d1516h2_8daaf6152771_806a8c22fdea%22%7D",
+      "domain": ".aboutyou.de",
+      "path": "/",
+      "expires": 1783425152.495404,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "ay-ab-test-user-id",
+      "value": "216596b0-f1a7-46c6-b727-681bd14d85b1",
+      "domain": ".aboutyou.de",
+      "path": "/",
+      "expires": 1788601552,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "ay-active-ab-tests",
+      "value": "ab_personalized_product_injections_1=ppi1-c|ab_sorting_cg_ph1_2=absp-1|ab_checkout_payment_preselection_w=acpp-1|ab_missions_claiming=mic-2",
+      "domain": ".aboutyou.de",
+      "path": "/",
+      "expires": 1788601552,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "_ttp",
+      "value": "3GAbvkouT1rMGcZI2sDd8b7hGi4",
+      "domain": ".tiktok.com",
+      "path": "/",
+      "expires": 1817113589.753506,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "_ga",
+      "value": "GA1.1.805513174.1783417553",
+      "domain": ".aboutyou.de",
+      "path": "/",
+      "expires": 1817977552.820639,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "_fbp",
+      "value": "fb.1.1783417552880.189347503438189254",
+      "domain": ".aboutyou.de",
+      "path": "/",
+      "expires": 1791193589.975542,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "uid",
+      "value": "42ba0356-c3ef-44a2-93a6-d874a4c030f5",
+      "domain": ".criteo.com",
+      "path": "/",
+      "expires": 1817113552.92476,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "_tt_enable_cookie",
+      "value": "1",
+      "domain": ".aboutyou.de",
+      "path": "/",
+      "expires": 1817113589,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "_ttp",
+      "value": "01KWXZGG0YTA4ZXQY047QJ904Q_.tt.1",
+      "domain": ".aboutyou.de",
+      "path": "/",
+      "expires": 1817113589,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "t_gid",
+      "value": "1d00ceec-b2c4-4e3f-89aa-ce52a2646674-tuct11465052",
+      "domain": ".taboola.com",
+      "path": "/",
+      "expires": 1814953582.724651,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "t_pt_gid",
+      "value": "1d00ceec-b2c4-4e3f-89aa-ce52a2646674-tuct11465052",
+      "domain": ".taboola.com",
+      "path": "/",
+      "expires": 1814953582.724731,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None",
+      "partitionKey": "https://aboutyou.de",
+      "_crHasCrossSiteAncestor": true
+    },
+    {
+      "name": "MUID",
+      "value": "2678969413C76F310AAB811B126D6EA2",
+      "domain": ".bing.com",
+      "path": "/",
+      "expires": 1817113553.983778,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "FPAU",
+      "value": "1.1.1577845573.1783417552",
+      "domain": ".aboutyou.de",
+      "path": "/",
+      "expires": 1791193550.813688,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "_uetsid",
+      "value": "a50d868079e811f18371c78f834c3b6a|1k4esi1|2|g7j|0|2379",
+      "domain": ".aboutyou.de",
+      "path": "/",
+      "expires": 1783503953,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "_uetvid",
+      "value": "a50d701079e811f19449a929705edbb1",
+      "domain": ".aboutyou.de",
+      "path": "/",
+      "expires": 1817113553,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "cto_bundle",
+      "value": "xUDgZ19yYnl3RnV3ZTZpb0ZTZlRNWE1WZEh3TCUyQk50d0FaNzJTMGh5QVpXYVdSSmt4ZkFqRFc5aiUyQkp4ZlZYOThUMThGZExiJTJCTHA5bUs2WnRnaTFkSlhwRHJHenglMkJtOEZJc1BiVVJjbEF1VEhHZ0FVNFgxTjVjZFNPRDRqamxQUHBhT0VCaGpFJTJGa0hrUU9FSDMlMkJ3czRKZ0FjSkElM0QlM0Q",
+      "domain": ".aboutyou.de",
+      "path": "/",
+      "expires": 1817581553,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "FPGSID",
+      "value": "1.1783417562.1783417562.G-D6RMRWZ2DM.HuzRl8pEmJlj6tOh6loKtA",
+      "domain": ".aboutyou.de",
+      "path": "/",
+      "expires": 1783419361.610645,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Strict"
+    },
+    {
+      "name": "Gender.gender",
+      "value": "female",
+      "domain": ".aboutyou.de",
+      "path": "/",
+      "expires": 1814953589,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "IDE",
+      "value": "AHWqTUkm2K2kL0KMD77SHfwTCIKIR5cnsaT72JwiRn01XLwboGWjO_EEXDAHyV2bVro",
+      "domain": ".doubleclick.net",
+      "path": "/",
+      "expires": 1817113566.447913,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "ayt_previous_page_url",
+      "value": "https%253A%252F%252Fen.aboutyou.de%252Fyour-shop%253FloginFlow%253Dlogin",
+      "domain": ".aboutyou.de",
+      "path": "/",
+      "expires": 1783419389.597349,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "_dd_s",
+      "value": "aid=52ef1ae8-7a5d-473a-979a-7c14d32aa811&logs=0&expire=1783418488199",
+      "domain": "en.aboutyou.de",
+      "path": "/",
+      "expires": 1814953588,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Strict"
+    },
+    {
+      "name": "tadarida-user-v1",
+      "value": "%7B%22token%22%3A%2289933b20-aa78-4700-9053-753c6285ace8%22%7D",
+      "domain": ".aboutyou.de",
+      "path": "/",
+      "expires": 1798969589,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "_ga_uid",
+      "value": "100963945",
+      "domain": ".aboutyou.de",
+      "path": "/",
+      "expires": 1817977589.475991,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "_ayt_cd",
+      "value": "%7B%22customerId%22%3A100963945%2C%22customerType%22%3A%22new%22%2C%22emh%22%3A%22700c3fa53da2f4077f8fb341d130e54c82fef2afa7d001dbb8a4aee7d8f427d4%22%2C%22emhec%22%3A%22700c3fa53da2f4077f8fb341d130e54c82fef2afa7d001dbb8a4aee7d8f427d4%22%2C%22emptyBasket%22%3Afalse%2C%22emptyWishlist%22%3Afalse%2C%22gender%22%3A%22%22%2C%22nkta%22%3A%22%22%2C%22pp%22%3Afalse%2C%22sessionId%22%3A%22%22%2C%22sourceUrl%22%3A%22https%3A%2F%2Fen.aboutyou.de%2Fyour-shop%22%2C%22vp%22%3Afalse%7D",
+      "domain": ".aboutyou.de",
+      "path": "/",
+      "expires": 1817977589.473424,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Strict"
+    },
+    {
+      "name": "_ayt_customer_data",
+      "value": "%7B%22event%22%3A%22customer_data%22%2C%22customer_id%22%3A100963945%2C%22cidhash%22%3A%226d1971c3807518958760b8ad2fda22e9cad9cc6424d1b964b8cfc6f9568e41c0%22%2C%22customer_type%22%3A%22new%22%2C%22login%22%3Atrue%2C%22nkta%22%3A0%2C%22bi_vp%22%3Afalse%2C%22eh%22%3A%22700c3fa53da2f4077f8fb341d130e54c82fef2afa7d001dbb8a4aee7d8f427d4%22%2C%22sourceUrl%22%3A%22https%3A%2F%2Fen.aboutyou.de%2Fyour-shop%22%2C%22device%22%3A%22desktop%22%2C%22gtm.uniqueEventId%22%3A3506%7D",
+      "domain": ".aboutyou.de",
+      "path": "/",
+      "expires": 1783428389.474195,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Strict"
+    },
+    {
+      "name": "ayt_current_page_url",
+      "value": "https%3A%2F%2Fen.aboutyou.de%2Fyour-shop",
+      "domain": ".aboutyou.de",
+      "path": "/",
+      "expires": 1783419389.598614,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "ttcsid_C1EAEI9T0U322RQPG4D0",
+      "value": "1783417552928::blN_nq873ny6_dw2Jpdf.1.1783417589610.1",
+      "domain": ".aboutyou.de",
+      "path": "/",
+      "expires": 1817113589,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "ttcsid",
+      "value": "1783417552929::gSF_zcUl9UF0s9Nd9g4T.1.1783417589610.0::1.36079.0::35271.8.485.780::0.0.0",
+      "domain": ".aboutyou.de",
+      "path": "/",
+      "expires": 1817113589,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "_ga_D6RMRWZ2DM",
+      "value": "GS2.1.s1783417552$o1$g1$t1783417589$j23$l0$h510135911",
+      "domain": ".aboutyou.de",
+      "path": "/",
+      "expires": 1817977589.642171,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "cto_bundle",
+      "value": "s8OwdV94S3N2MExFUG1zcFJBdFRWUyUyRnNxdW9BbzRHekJwdUJiZE9wNlJWd0JyWlFYY25KQyUyQjJocjBQdlU0bkhkWTFuaWNJQmplOXp1RlFrM1UlMkIyM2ltdVJXSWJLTnVMTVBhNHEwNnp1WUxYOVRWVVRqRkdVVkp2VnVyZUhUbmtYOWJBN0hHc2x6MVdETTNMZjlybGZWT0NSZFElM0QlM0Q",
+      "domain": ".criteo.com",
+      "path": "/",
+      "expires": 1817113589.722138,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None",
+      "partitionKey": "https://aboutyou.de",
+      "_crHasCrossSiteAncestor": true
+    }
+  ],
+  "origins": [
+    {
+      "origin": "https://en.aboutyou.de",
+      "localStorage": [
+        {
+          "name": "eng_mt",
+          "value": "{\"ver\":36,\"sessionStartTime\":1783417552639,\"scrollDepth\":0,\"sessionDepth\":[\"-1035596884\"],\"timeOnSite\":0,\"crossSessionsData\":{\"sessionsHistory\":[1783417552639]},\"numOfTimesMetricsSent\":4}"
+        },
+        {
+          "name": "_uetvid_exp",
+          "value": "Sun, 01 Aug 2027 09:45:53 GMT"
+        },
+        {
+          "name": "cto_bundle",
+          "value": "xUDgZ19yYnl3RnV3ZTZpb0ZTZlRNWE1WZEh3TCUyQk50d0FaNzJTMGh5QVpXYVdSSmt4ZkFqRFc5aiUyQkp4ZlZYOThUMThGZExiJTJCTHA5bUs2WnRnaTFkSlhwRHJHenglMkJtOEZJc1BiVVJjbEF1VEhHZ0FVNFgxTjVjZFNPRDRqamxQUHBhT0VCaGpFJTJGa0hrUU9FSDMlMkJ3czRKZ0FjSkElM0QlM0Q"
+        },
+        {
+          "name": "_gcl_ls",
+          "value": "{\"schema\":\"gcl\",\"version\":1,\"gtg_load_status\":{\"status\":2,\"expires\":1783503945354},\"gsid_dc\":{\"value\":{\"joinId\":\"4FigJlNNDIgsjCZBpT1L3QMrx1EE1dhK5g\",\"lastJoinedTimeMs\":1783417552279},\"expires\":1783417852279},\"gcl_ctr\":{\"value\":{\"value\":0,\"timeouts\":0,\"errors\":0,\"eopCount\":0,\"creationTimeMs\":1783417552281},\"expires\":1791193552281}}"
+        },
+        {
+          "name": "_uetsid",
+          "value": "a50d868079e811f18371c78f834c3b6a|1k4esi1|2|g7j|0|2379"
+        },
+        {
+          "name": "ucString",
+          "value": "N4IgbgpgTgzglgewHYgFwEYA0ICucBq08yaIALAHSUAMI2AxsgC5QIA2b0AkgCakQBDAWQBGANgCcIgMxiA7GQCs9AGbyIIlXIiKBUqQCYV1BRPQj0ikdpEQtADhn37PEffRiTZCHJH1JdCBsAkgA5jgCoRD8KNgwEExMcGFooEwAngAO0aggAOIAIgAKAEqBcHy5oegAqmzoAMJkSABeBQDuANIwAFKBkLCIKLnoBooU6OjSE9L2IAC+2DiZPAJMEDwAgkxo6HL20mR7iooGBnLUSytrGwBC6aTIm/T0EJlMmxwAytBgcK8wQL0KCCdZbHYYfaHY5kMToZzYEEARzwIMqKgEbHicSYaxwgNymwAMkSAPqbBoNACiRQAKlSCoEMtlSFSABpFIlcBpcWmBAAWAhg/NImm03gMEmkKhO0iEZBU9AE5h4r2k0jGInOZFkZAVUoMPh4cjE9jOilhilm1Hs2g0Sh1gXiUD+r14BIA2gBdbChTL0L5wUJITFoDFYiDYZLrKACehJEi5fHQBZAA"
+        },
+        {
+          "name": "aywt_pageHistory",
+          "value": "[{\"type\":\"detailed\",\"page\":{\"search\":\"\",\"type\":\"welcome\",\"loading\":false,\"path\":\"/your-shop\",\"impressionCache\":{\"current\":{}},\"title\":\"\"},\"timestamp\":1783417565987},{\"type\":\"detailed\",\"page\":{\"path\":\"/your-shop\",\"search\":\"\",\"type\":\"login_modal\",\"id\":\"login\"},\"timestamp\":1783417575613},{\"type\":\"detailed\",\"page\":{\"search\":\"loginFlow=login\",\"type\":\"welcome\",\"loading\":false,\"path\":\"/your-shop\",\"impressionCache\":{\"current\":{}},\"title\":\"\"},\"timestamp\":1783417575689},{\"type\":\"detailed\",\"page\":{\"search\":\"\",\"type\":\"welcome\",\"loading\":false,\"path\":\"/your-shop\",\"impressionCache\":{\"current\":{}},\"title\":\"\"},\"timestamp\":1783417589169}]"
+        },
+        {
+          "name": "lastExternalReferrerTime",
+          "value": "1783417552871"
+        },
+        {
+          "name": "ay-last-user",
+          "value": "JTdCJTIybmFtZSUyMiUzQSUyMlJhc2lrYSUyMiUyQyUyMmVtYWlsJTIyJTNBJTIyZ29ob2thcnJhc2lrYSU0MGdtYWlsLmNvbSUyMiUyQyUyMmxvZ2luVHlwZSUyMiUzQSUyMmVtYWlsJTIyJTJDJTIybG9nT24lMjIlM0ExNzgzNDE3NTg5MDc4JTdE"
+        },
+        {
+          "name": "ucData",
+          "value": "{\"consent\":{\"services\":{\"M_EOROGk2Pg9ZR\":{\"name\":\"ABOUT YOU (Basic Tracking)\",\"consent\":true},\"w6nfrRum0y3H8O\":{\"name\":\"ABOUT YOU (Performance)\",\"consent\":true},\"aSxAkHFqS9FdYe\":{\"name\":\"Cloudflare\",\"consent\":true},\"7TdtjOvX9vOs-9\":{\"name\":\"Datadog (Crash Monitoring)\",\"consent\":true},\"3gNt6kKDdM_hLN\":{\"name\":\"Facebook Login\",\"consent\":true},\"_XH8m5CVMX2XYG\":{\"name\":\"Google Single Sign-On\",\"consent\":true},\"ISclnC9y2_TLqR\":{\"name\":\"Google Tag Manager\",\"consent\":true},\"ZTC3X_PI93E1fX\":{\"name\":\"Klarna Purchase Flow\",\"consent\":true},\"wvn2v0Px-MejKG\":{\"name\":\"Sign in with Apple\",\"consent\":true},\"oyc8ggiyTKF7Bc\":{\"name\":\"Ultimate Core\",\"consent\":true},\"ALHhMllQyw3Qyx\":{\"name\":\"Usercentrics Consent Management Platform\",\"consent\":true},\"MMbRBi46puDo2F\":{\"name\":\"ABOUT YOU (Personalization)\",\"consent\":true},\"A4TbXQodU7UxIt\":{\"name\":\"Bambuser\",\"consent\":true},\"jBvqd3QMgvY6mV\":{\"name\":\"Creation and Display of Google Marketing Platform 360 Campaigns and Ads\",\"consent\":true},\"xxjnZJl4PQUcUx\":{\"name\":\"Criteo\",\"consent\":true},\"pOs9na2S9qHDXc\":{\"name\":\"Datadog (Info Logs)\",\"consent\":true},\"FC6GWdH7TIEGGz\":{\"name\":\"Fit Analytics\",\"consent\":true},\"gb94HlQ8mF1wmd\":{\"name\":\"Glami\",\"consent\":true},\"sQYiqGQhKbVEe8\":{\"name\":\"Google Ads\",\"consent\":true},\"b3q9Is0dImI96G\":{\"name\":\"Google Analytics 4\",\"consent\":true},\"C8HtYMwNOa_BKm\":{\"name\":\"Meta\",\"consent\":true},\"VFHK8EWPehbRWT\":{\"name\":\"Microsoft Advertising\",\"consent\":true},\"l5DN52ipgGm24x\":{\"name\":\"Optimizely\",\"consent\":true},\"q4LYyVzbHoNVHj\":{\"name\":\"Pinterest\",\"consent\":true},\"kPgjv2Rg3Z6Bvp\":{\"name\":\"Rokt\",\"consent\":true},\"ZOiZs71PFP5llE\":{\"name\":\"RTBHouse\",\"consent\":true},\"ZuwXAWsq651MMJ\":{\"name\":\"Sovendus\",\"consent\":true},\"c1T8aadmHST2e4\":{\"name\":\"Store and/or retreive information on your device\",\"consent\":true},\"rw0gsdkLrTwIdz\":{\"name\":\"Taboola\",\"consent\":true},\"BTSiVY7PNCM7iF\":{\"name\":\"TikTok\",\"consent\":true},\"TmUaymd3WtRUqj\":{\"name\":\"Tradedoubler\",\"consent\":true},\"lKJ_EoLuH7TxX9\":{\"name\":\"Vodafone TV Match\",\"consent\":true}}},\"ui\":{\"language\":\"en\"}}"
+        },
+        {
+          "name": "_uetsid_exp",
+          "value": "Wed, 08 Jul 2026 09:45:53 GMT"
+        },
+        {
+          "name": "tadarida-optional-user-v1",
+          "value": "%7B%22userData%22%3A%7B%22id%22%3A100963945%2C%22gender%22%3A%22female%22%2C%22email%22%3A%22gohokarrasika%40gmail.com%22%2C%22emailHash%22%3A%7B%22emh%22%3A%22700c3fa53da2f4077f8fb341d130e54c82fef2afa7d001dbb8a4aee7d8f427d4%22%2C%22emhec%22%3A%2246f941437476f4762cbebbe5a92e5774ff3bc8b09a77a9a90c99290c8da71e42%22%7D%2C%22firstName%22%3A%22Rasika%22%2C%22lastName%22%3A%22Gohokar%22%2C%22phone%22%3A%22%22%2C%22birthday%22%3A%22Tue%20Jul%2007%202026%2011%3A46%3A29%20GMT%2B0200%20(Central%20European%20Summer%20Time)%22%2C%22isExistingCustomer%22%3Afalse%2C%22loginType%22%3A%22email%22%7D%7D"
+        },
+        {
+          "name": "_uetvid",
+          "value": "a50d701079e811f19449a929705edbb1"
+        },
+        {
+          "name": "lastExternalReferrer",
+          "value": "empty"
+        },
+        {
+          "name": "taboola global:user-id",
+          "value": "1d00ceec-b2c4-4e3f-89aa-ce52a2646674-tuct11465052"
+        },
+        {
+          "name": "1046396:session-data",
+          "value": "v2_5a38ef11d4ac202426fc9ff1b931fbf9_1d00ceec-b2c4-4e3f-89aa-ce52a2646674-tuct11465052_1783417554_1783417554_CNawjgYQ_O4_GPn94N_zMyABKAEwODib4wlAiIoQSMWG2ANQouwQWABgAGjKhZvptsiP2W5wAYABAIgBAJABAA"
+        }
+      ]
+    },
+    {
+      "origin": "https://challenges.cloudflare.com",
+      "localStorage": [
+        {
+          "name": "cf.turnstile.u",
+          "value": "G9UauIceQpRVL5KIwCmjhNf4noLLjE63rF46JwRO_9U-1783417551-1.3.1.1-9D70GlrdwLAIFMxYmNRGbEQ6wH2uF4XIbF3Gj.fwFjtnM.6WKH_GEzx18yVVcJdrFpk.FAqfdn5dBEPDu6H4RQ"
+        }
+      ]
+    }
+  ]
+}
