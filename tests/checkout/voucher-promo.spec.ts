@@ -17,7 +17,7 @@ test.describe('Voucher / Promo Code @cart @voucher', () => {
 
   test.describe('Voucher Input Presence', () => {
 
-    //test.use({ productsToAdd: ['pant', 'dress'] });
+    test.use({ productsToAdd: ['seiko'] });
     test('Provide valid voucher code and verify it is applied @positive @regression', async ({ page, pageWithProductsInCart, basketPage, checkoutPage }) => {
 
       //open basket page
@@ -50,7 +50,6 @@ test.describe('Voucher / Promo Code @cart @voucher', () => {
   // ─── Negative Tests ─────────────────────────────────────────
 
   test.describe('Invalid Voucher Codes @negative', () => {
-    test.use({ productsToAdd: ['pant'] })
     test('Provide invalid voucher code and verify it is not applied @negative @regression', async ({ page, pageWithProductsInCart, basketPage, checkoutPage }) => {
 
       //open basket page

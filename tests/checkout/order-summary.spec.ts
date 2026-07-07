@@ -11,9 +11,16 @@ import { BasketPage } from '../../src/pages/basket.page';
 import { TestData } from '../../src/helpers/test-data';
 
 test.describe('Order Summary Verification @checkout @order-summary', () => {
+  // Parse values to floats
+  const parsePrice = (priceStr: string) => {
+    const match = priceStr.match(/\d+[.,]\d{2}/);
+    if (!match) return 0;
+    return parseFloat(match[0].replace(',', '.'));
+  };
 
   test('Verify order summary displays correct product details @regression', async ({ page, pageWithProductsInCart, basketPage, checkoutPage }) => {
     const productDetails = (pageWithProductsInCart as any).productDetails;
+    console.log('Product details:', productDetails);
 
     let basketTotal = '';
 
@@ -44,6 +51,10 @@ test.describe('Order Summary Verification @checkout @order-summary', () => {
       // Total should contain a price value
       expect(summary.total).toMatch(/[€\d]/);
       console.log('Summary total:', summary.total);
+      // verify basket total with order total
+      expect(parsePrice(summary.total)).toBe(parsePrice(basketTotal));
+
+      //TODO verify other order details
     });
   });
 
