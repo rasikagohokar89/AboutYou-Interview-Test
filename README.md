@@ -3,6 +3,8 @@
 > **Playwright + TypeScript** E2E test suite for the About You e-commerce platform.  
 > Covers the complete user journey: browsing, search, product detail, basket, checkout, payment.
 
+> **The logins used for the test automation will persist till 12-07-2026, after this date please contact me. I will push the new user states!**
+
 ---
 
 ## Table of Contents
@@ -37,36 +39,31 @@ Optional:
 ## Quick Start
 
 ```bash
-# 1. Clone the repository
+# 1. Create a virtual enviornment
+python -m venv venv
+
+# 2. Clone the repository
 git clone https://github.com/rasikagohokar89/AboutYou-Interview-Test.git
 
-# 2. Traverse to the directory 
+# 3. Traverse to the directory 
 cd .\AboutYou-Interview-Test\
 
-# 3. Install dependencies
+# 4. Install dependencies
 npm install
 
-# 4. Install Playwright browsers (Chromium, Firefox)
+# 5. Install Playwright browsers (Chromium, Firefox)
 npm run setup
 
-# 5. Configure environment (required for authenticated checkout tests)
+# 6. Configure environment (required for authenticated checkout tests)
 cp .env.example .env
 # Edit .env with your test account credentials
 
-# 6. Run all tests on Chromium (with 3 workers)
+# 7. Run all tests on Chromium (with 3 workers)
 npx playwright test --project=chromium --workers=3
 
-# 7. View the HTML report
+# 8. View the HTML report
 npm run report
 ```
-### First Run Checklist
-
-1. Ensure `.env` has valid `TEST_USER_EMAIL` and `TEST_USER_PASSWORD`
-2. The first run executes `global-setup.ts` which logs in and saves auth state to `.auth/user.json`
-3. All subsequent tests reuse this stored session (no repeated logins)
-
----
-
 ## Project Structure
 
 ```
