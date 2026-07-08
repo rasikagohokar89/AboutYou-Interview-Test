@@ -35,7 +35,8 @@ Included scenarios real users encounter daily: browser back button, page refresh
 ## Challenges & Test Flakiness
 
 During test suite development and run executions, a few factors were identified that could cause test flakiness:
-- **Search Bar Flakiness**: There were recent changes observed around the search bar area on the website, which intermittently causes element interaction issues and search failures.
+- **Search Bar Flakiness**: There were recent changes observed around the search bar area on the website, which intermittently causes element interaction issues and search failures even after locator fix. 
+    **Refer attachment: SearchBar_failure.png**
 - **Anti-Bot / Human Verification**: The storefront features strict security human verification checks (such as Cloudflare Turnstile). While this is excellent for production security, it interferes with automated testing. This was frequently observed during the add-to-basket flow where challenges would appear intermittently.
 - **Login Gates**: CAPTCHAs and security checks on the login page made fully automated login flows flaky or impossible. To bypass this, I implemented a manual login script (`scripts/manual-login.ts`) where the user logs in once, and the session state is saved to `.auth/user.json`, `.auth/user-1.json`, and `.auth/user-2.json`. I configured parallel workers to use separate session files so that tests can run in parallel (up to 3 workers) without cart conflicts.
 

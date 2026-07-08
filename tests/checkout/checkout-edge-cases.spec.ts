@@ -49,9 +49,6 @@ test.describe('Checkout Edge Cases @checkout @edge-case', () => {
 
     test('should handle page refresh during checkout @regression @edge-case', async ({ pageWithProductsInCart, basketPage, checkoutPage, page }) => {
 
-      await basketPage.open();
-      await basketPage.proceedToCheckout();
-
       // Navigate to checkout
       await basketPage.open();
       await basketPage.proceedToCheckout();
