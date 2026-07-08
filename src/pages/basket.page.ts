@@ -181,7 +181,7 @@ export class BasketPage extends BasePage {
     const item = this.cartItems.nth(index);
 
     return {
-      name: await item.locator('a[href*="/p/"]').allTextContents().then(texts => texts.join(' ').trim()),
+      name: await item.getByTestId('productName').allTextContents().then(texts => texts.join(' ').trim()),
       brand: await item.locator('[class*="brand"], [data-testid*="brand"]').first().textContent({ timeout: 2000 }).then(t => t?.trim() || '').catch(() => ''),
       size: await item.getByText(/Size|Größe/i).first().textContent({ timeout: 2000 }).then(t => t?.trim() || '').catch(() => ''),
       quantity: await item.locator('select, input[type="number"]').first().inputValue({ timeout: 2000 }).then(v => parseInt(v, 10)).catch(() => 1),

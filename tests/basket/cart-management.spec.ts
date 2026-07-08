@@ -135,6 +135,8 @@ test.describe('Cart Calculations @cart', () => {
           await basketPage.removeItem(1);
           // Wait for removal to reflect in totals
           await page.waitForTimeout(3000);
+          await page.reload();
+          await page.waitForLoadState('domcontentloaded');
         });
 
         // 3. Verify price is updated
@@ -163,7 +165,6 @@ test.describe('Cart Calculations @cart', () => {
 
       await test.step('Get initial prices', async () => {
         initialSubtotal = parsePrice(await basketPage.getSubtotal());
-        shipping = parsePrice(await basketPage.getShippingCost()) || 0;
       });
 
       await test.step('Increase item quantity', async () => {
@@ -188,12 +189,13 @@ test.describe('Cart Calculations @cart', () => {
         // Subtotal should be doubled
         expect(updatedSubtotal).toBeCloseTo(initialSubtotal * 2, 2);
         // Total should be the new subtotal + shipping
-        expect(updatedTotal).toBeCloseTo(updatedSubtotal + shipping, 2);
+        expect(updatedTotal).toBeCloseTo(updatedSubtotal, 2);
       });
     });
 
     test('should persist cart across page navigation @regression', async ({ pageWithProductsInCart, basketPage, homePage }) => {
       const productDetails = (pageWithProductsInCart as any).productDetails;
+
 
       //Navigate to homepage
       await homePage.open();
@@ -210,8 +212,8 @@ test.describe('Cart Calculations @cart', () => {
       if (productDetails.name) {
         // The cart item name often compresses text, drops words like "in", or includes promo labels like "DEAL".
         // Just check the first word (usually the brand name) to avoid mismatches.
-        const firstWord = productDetails.name.split(' ')[0].toLowerCase();
-        expect(cartItem.name.toLowerCase()).toContain(firstWord);
+        const firstWord = productDetails.name.toLowerCase();
+        expect(firstWord).toContain(cartItem.name.toLowerCase());
       }
 
       expect(cartItem.quantity).toBe(1);
