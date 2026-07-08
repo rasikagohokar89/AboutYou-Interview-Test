@@ -56,7 +56,6 @@ npm run setup
 
 # 6. Configure environment (required for authenticated checkout tests)
 cp .env.example .env
-# Edit .env with your test account credentials
 
 # 7. Run all tests on Chromium (with 3 workers)
 npx playwright test --project=chromium --workers=3
@@ -64,6 +63,12 @@ npx playwright test --project=chromium --workers=3
 # 8. View the HTML report
 npm run report
 ```
+## Existing Results
+
+Visit page  https://rasikagohokar89.github.io/AboutYou-Interview-Test/ for the initial set of results observed on host pc.
+
+---
+
 ## Project Structure
 
 ```
